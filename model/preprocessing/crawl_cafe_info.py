@@ -12,33 +12,7 @@ from selenium.webdriver.common.keys import Keys
 ##################### variable related selenium ##########################
 ##########################################################################
 # 서울 특별시 구 리스트
-gu_list = [
-    "마포구",
-    "서대문구",
-    "은평구",
-    "종로구",
-    "중구",
-    "용산구",
-    "성동구",
-    "광진구",
-    "동대문구",
-    "성북구",
-    "강북구",
-    "도봉구",
-    "노원구",
-    "중랑구",
-    "강동구",
-    "송파구",
-    "강남구",
-    "서초구",
-    "관악구",
-    "동작구",
-    "영등포구",
-    "금천구",
-    "구로구",
-    "양천구",
-    "강서구",
-]
+gu_list = ["서귀포시", "제주시"]
 
 
 # csv 파일에 헤더 만들어 주기
@@ -49,10 +23,6 @@ for index, gu_name in enumerate(gu_list):
     file.close()  # 처음에 csv파일에 칼럼명 만들어주기
 
     options = webdriver.ChromeOptions()
-    # options.add_argument('headless')
-    options.add_argument(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36   "
-    )
     options.add_argument("lang=ko_KR")
     chromedriver_path = "chromedriver"
     driver = webdriver.Chrome(
