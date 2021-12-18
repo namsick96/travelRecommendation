@@ -3,20 +3,31 @@
 import React, { useState } from "react";
 import { useParams, useHistory, Link, Route } from "react-router-dom";
 import Questions from "../questions";
+import { useSelector, useDispatch } from "react-redux";
 
 function GetType() {
   let { id } = useParams();
   let found = Questions.find((x) => x.id == id);
   let history = useHistory();
+  let state = useSelector((state) => state);
+  let dispatch = useDispatch();
+  let [answer, setAnswer] = useState(0);
 
   return (
     <>
       <div className="content">
         <h3>{found.question}</h3>
-        <p>{found.a1}</p>
-        <p>{found.a2}</p>
-        <p>{found.a3}</p>
-        <p>{found.a4}</p>
+        {found.answer.map((a, i) => {
+          return (
+            <button
+              onClick={() => {
+                setAnswer(i);
+              }}
+            >
+              {a}
+            </button>
+          );
+        })}
       </div>
       {id != 0 ? (
         <button
@@ -32,6 +43,7 @@ function GetType() {
         <button
           onClick={() => {
             // 문항별 응답 store에 저장
+            dispatch({ type: "ADD_ANSWER", payload: found.result[answer] }); // found 중 사용자가 고른 선지에 해당하는 r값을 전송
           }}
         >
           <Link to={`/test/${parseInt(id) + 1}`}>다음 문제</Link>
@@ -41,6 +53,7 @@ function GetType() {
         <button
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송
+            dispatch({ type: "ADD_ANSWER", payload: found.result[answer] });
           }}
         >
           제출하기
