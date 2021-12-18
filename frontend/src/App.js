@@ -10,10 +10,10 @@ import { Link, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <p>nav</p>
+      <h2>navbar</h2>
       <Switch>
         <Route exact path="/" component={Home}></Route>
-        <Route path="/test" component={GetType}></Route>
+        <Route path="/test/:id" component={GetType}></Route>
         <Route path="/place" component={GetPlace}></Route>
         <Route path="/result" component={Result}></Route>
       </Switch>
