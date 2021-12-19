@@ -13,7 +13,7 @@ gu_list = ["서귀포시", "제주시"]
 
 # csv 파일에 헤더 만들어 주기
 for index, gu_name in enumerate(gu_list):
-    fileName = 'cafe' + '.'+'csv'
+    fileName = 'alcohol.csv'
 
     if index==0:
         file = open(fileName, "w", encoding="utf-8-sig")
@@ -24,6 +24,13 @@ for index, gu_name in enumerate(gu_list):
 
     options = webdriver.ChromeOptions()
     options.add_argument("lang=ko_KR")
+    options.add_argument('--headless')
+    options.add_argument("--disable-extensions")
+    options.add_argument("disable-infobars")
+    options.add_argument("window-size=1920x1080")
+    options.add_argument("no-sandbox")
+    options.add_argument("disable-gpu")
+    options.add_argument( 'user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36')
     chromedriver_path = "chromedriver"
     driver = webdriver.Chrome(
         os.path.join(os.getcwd(), chromedriver_path), options=options
@@ -32,11 +39,14 @@ for index, gu_name in enumerate(gu_list):
     search_area = driver.find_element_by_xpath(
         '//*[@id="search.keyword.query"]'
     )  # 검색 창
-    search_area.send_keys(gu_name + " 카페")  # 검색어 입력
+    search_area.send_keys(gu_name + " 술집")  # 검색어 입력
     driver.find_element_by_xpath('//*[@id="search.keyword.submit"]').send_keys(
         Keys.ENTER
     )  # Enter로 검색
     driver.implicitly_wait(3)  # 기다려 주자
+    search_area2 = driver.find_element_by_xpath('//*[@id="info.search.place.sort"]/li[2]/a') #인기도순 검색
+    search_area2.send_keys(Keys.ENTER)
+    driver.implicitly_wait(3)
     more_page = driver.find_element_by_id("info.search.place.more")
     # more_page.click()
     more_page.send_keys(Keys.ENTER)  # 더보기 누르고
