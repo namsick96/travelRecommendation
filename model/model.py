@@ -164,7 +164,7 @@ class DB:
 
 def getCourse(input):
 
-    db = DB("data.csv")
+    #db = DB("data.csv") 안지훈이 테스트 하려고 일단 주석처리함. 대규 나중에 풀어줘.
     print(input)
     dst, src, mvp = 1, 2, 3
 
