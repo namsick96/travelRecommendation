@@ -165,18 +165,20 @@ class DB:
 def getCourse(input):
 
     db = DB("data.csv")
-
+    print(input)
     dst, src, mvp = 1, 2, 3
 
-    if dst == src:
-        if len(mvp) == 0:
-            result = db.greedyVisitAlg(src)
-        else:
-            result = db.expandedSquareVisitAlg(src, mvp)
-    else:
-        if len(mvp) == 0:
-            result = db.squareVisitAlg(src, dst)
-        else:
-            result = db.squareVisitAlg(src, dst, mvp)
+    # if dst == src:
+    #     if len(mvp) == 0:
+    #         result = db.greedyVisitAlg(src)
+    #     else:
+    #         result = db.expandedSquareVisitAlg(src, mvp)
+    # else:
+    #     if len(mvp) == 0:
+    #         result = db.squareVisitAlg(src, dst)
+    #     else:
+    #         result = db.squareVisitAlg(src, dst, mvp)
+
+    result = [(1, 1), (0, 2), (3, 4)(5, 6), (3, 1)]
 
     return result
