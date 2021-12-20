@@ -18,6 +18,9 @@ public class ModelRequest {
 
 //        String command ="pwd";//"python3 /Users/jihoonan/Desktop/travelRecommendation/backend/test.py";
 //        위에 command는 예시임.
+        // 이 부분 이제 아님. flask랑 통신함.
+
+
         List<String> cmd= new ArrayList<>();
         cmd.add("python3");
         cmd.add("/Users/jihoonan/Desktop/travelRecommendation/backend/test.py");

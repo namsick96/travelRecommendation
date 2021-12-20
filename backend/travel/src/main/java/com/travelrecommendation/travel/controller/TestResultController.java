@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -17,7 +19,7 @@ import java.util.HashMap;
 public class TestResultController {
 
     @GetMapping
-    public TypeResult test_Result(@RequestBody UserTestResultRequest request){
+    public TypeResult test_Result(@RequestBody UserTestResultRequest request) throws IllegalAccessException {
 //        Integer mukVal=request.getQ1().get("muk").getAsInt();
 
         //initialization
@@ -29,13 +31,25 @@ public class TestResultController {
         scores.put("healing",0);
         scores.put("activity",0);
 
-        Integer mukVal=request.getQ1().get("muk");
-        Integer travleVal=request.getQ2().get("travel");
-        log.info(mukVal.toString());
-        log.info(travleVal.toString());
+        for( HashMap<String,Integer> i : request.getAnswer()){
+            Set<String> keySet=i.keySet();
+            for(String key : keySet){
+                scores.put(key,scores.get(key)+i.get(key));
+            }
+        }
 
+        int maximum=-100000;
+        String biggest="";
+        Set<String> keySet=scores.keySet();
+        for(String key : keySet){
+            int now = scores.get(key);
+            if(now>=maximum){
+                biggest=key;
+                maximum=now;
+            }
+        }
         TypeResult type= new TypeResult();
-        type.setType("muk");
+        type.setType(biggest);
         return type;
 
     }
