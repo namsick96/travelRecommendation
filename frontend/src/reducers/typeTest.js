@@ -12,9 +12,9 @@ function typeTest(state = initialState, action) {
     case "POST_ANSWER":
       console.log("post요청 발생");
       console.log("요청 시 state값");
-      console.log(state);
+      console.log({ answer: [...state] });
       axios
-        .post("127.0.0.1:8080/type_result", state)
+        .post("127.0.0.1:8080/type_result", { answer: [...state] })
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
       return state;
