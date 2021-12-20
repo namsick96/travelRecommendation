@@ -9,7 +9,6 @@ function GetType() {
   let { id } = useParams();
   let found = Questions.find((x) => x.id == id);
   let history = useHistory();
-  let state = useSelector((state) => state);
   let dispatch = useDispatch();
   let [answer, setAnswer] = useState(0);
 
@@ -19,13 +18,16 @@ function GetType() {
         <h3>{found.question}</h3>
         {found.answer.map((a, i) => {
           return (
-            <button
-              onClick={() => {
-                setAnswer(i);
-              }}
-            >
-              {a}
-            </button>
+            <div key={i}>
+              <button
+                onClick={() => {
+                  setAnswer(i);
+                }}
+              >
+                {a}
+              </button>
+              <br></br>
+            </div>
           );
         })}
       </div>
@@ -54,6 +56,7 @@ function GetType() {
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송
             dispatch({ type: "ADD_ANSWER", payload: found.result[answer] });
+            dispatch({ type: "POST_ANSWER" });
           }}
         >
           제출하기

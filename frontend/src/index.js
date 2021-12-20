@@ -5,10 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import testReducer from "./reducers/testReducer";
-import { combineReducers, createStore } from "redux";
+import typeTest from "./reducers/typeTest";
+import typeResult from "./reducers/typeResult";
+import { combineReducers, createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import ReduxThunk from "redux-thunk";
 
-let store = createStore(combineReducers({ testReducer }));
+let store = createStore(
+  combineReducers({ typeTest, typeResult }),
+  composeWithDevTools(applyMiddleware(ReduxThunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
