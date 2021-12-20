@@ -179,6 +179,6 @@ def getCourse(input):
     #     else:
     #         result = db.squareVisitAlg(src, dst, mvp)
 
-    result = {"courses": [(1, 1), (0, 2), (3, 4)(5, 6), (3, 1)]}
+    result = {"courses": [(1, 1), (0, 2), (3, 4),(5, 6), (3, 1)]}
 
     return result
