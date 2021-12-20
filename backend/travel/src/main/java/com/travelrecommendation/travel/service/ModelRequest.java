@@ -30,7 +30,7 @@ public class ModelRequest {
 //        위에 command는 예시임.
         // 이 부분 이제 아님. flask랑 통신함.
 
-        String url = "http://127.0.0.1:8081/";
+        String url = "http://3.36.105.244:8081/";
         String sb = "";
         Gson gson = new Gson();
 
@@ -51,8 +51,6 @@ public class ModelRequest {
                 ArrayList<String> answer = new ArrayList<>();
                 answer.add(result);
                 return answer;
-
-                //naver api를 사용해서 경유지 파악하기
 
             } else {
                 throw new IllegalAccessException("Status of model is not 200");
