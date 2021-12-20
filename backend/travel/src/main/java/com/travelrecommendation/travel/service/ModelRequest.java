@@ -1,12 +1,22 @@
 package com.travelrecommendation.travel.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.travelrecommendation.travel.dto.UserFinalRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,27 +30,61 @@ public class ModelRequest {
 //        위에 command는 예시임.
         // 이 부분 이제 아님. flask랑 통신함.
 
+        String url = "http://127.0.0.1:8081/";
+        String sb = "";
+        Gson gson = new Gson();
 
-        List<String> cmd= new ArrayList<>();
-        cmd.add("python3");
-        cmd.add("/Users/jihoonan/Desktop/travelRecommendation/backend/test.py");
-        cmd.add(request.getType());
-        ProcessBuilder builder=new ProcessBuilder(cmd);
-        Process process=builder.start();
-        InputStream input =process.getInputStream();
+        HttpClient client = HttpClientBuilder.create().build();
 
-        int exitVal= process.waitFor();
-        String text = new BufferedReader(
-                new InputStreamReader(input, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n"));
-        String []str=text.split(" ");
-        ArrayList<String> tokens=new ArrayList<>();
-        for (int i=0; i<str.length; i++){
-            tokens.add(str[i]);
+        HttpPost httpPost = new HttpPost(url);
+        try {
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Connection", "keep-alive");
+            httpPost.setHeader("Content-type", "application/json");
+
+            httpPost.setEntity(new StringEntity(gson.toJson(request)));
+
+            HttpResponse response = client.execute(httpPost);
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+                String result = EntityUtils.toString(response.getEntity());
+                ArrayList<String> answer = new ArrayList<>();
+                answer.add(result);
+                return answer;
+
+                //naver api를 사용해서 경유지 파악하기
+
+            } else {
+                throw new IllegalAccessException("Status of model is not 200");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return tokens;
-    }
 
+//        List<String> cmd= new ArrayList<>();
+//        cmd.add("python3");
+//        cmd.add("/Users/jihoonan/Desktop/travelRecommendation/backend/test.py");
+//        cmd.add(request.getType());
+//        ProcessBuilder builder=new ProcessBuilder(cmd);
+//        Process process=builder.start();
+//        InputStream input =process.getInputStream();
+//
+//        int exitVal= process.waitFor();
+//        String text = new BufferedReader(
+//                new InputStreamReader(input, StandardCharsets.UTF_8))
+//                .lines()
+//                .collect(Collectors.joining("\n"));
+//        String []str=text.split(" ");
+//        ArrayList<String> tokens=new ArrayList<>();
+//        for (int i=0; i<str.length; i++){
+//            tokens.add(str[i]);
+//        }
+//
+//        return tokens;
+        ArrayList<String> answer2 = new ArrayList<>();
+        answer2.add("Error");
+        return null;
+    }
 }
