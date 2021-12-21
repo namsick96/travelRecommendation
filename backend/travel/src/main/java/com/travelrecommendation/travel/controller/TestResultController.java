@@ -31,6 +31,8 @@ public class TestResultController {
         scores.put("healing",0);
         scores.put("activity",0);
 
+        log.info("test_result bean activated");
+
         for( HashMap<String,Integer> i : request.getAnswer()){
             Set<String> keySet=i.keySet();
             for(String key : keySet){
