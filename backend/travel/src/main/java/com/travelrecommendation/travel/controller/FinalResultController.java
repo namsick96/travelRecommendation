@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @RequestMapping("/final_result")
 public class FinalResultController {
 
-    @GetMapping
+    @PostMapping
     public FinalResult final_result(@RequestBody UserFinalRequest request) throws IOException, InterruptedException {
         ModelRequest modelRequest = new ModelRequest();
         ArrayList<String> answer= modelRequest.startModel(request);

@@ -16,7 +16,7 @@ import java.util.Set;
 @RequestMapping("/type_result")
 public class TestResultController {
 
-    @GetMapping
+    @PostMapping
     public TypeResult test_Result(@RequestBody UserTestResultRequest request) throws IllegalAccessException {
 //        Integer mukVal=request.getQ1().get("muk").getAsInt();
 
