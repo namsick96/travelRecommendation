@@ -58,6 +58,7 @@ def get_store_review_data(driver, place_info):
         try:
             driver.implicitly_wait(10)
             scrollable_div = driver.find_element_by_css_selector('div.siAUzd-neVct.section-scrollbox.cYB2Ge-oHo7ed.cYB2Ge-ti6hGc')
+            time.sleep(randrange(3,5,1))
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', scrollable_div)
             time.sleep(randrange(2,5,1))
             
@@ -117,12 +118,6 @@ def main():
     for i in range(place_len):
     
         result = start_search(driver, search_name[i])
-        if(len(result) != 0):
-            review_num = []
-            review_num.append(place_name[i] + " " + str(len(result)))
-            review_num_data = pd.DataFrame(review_num)
-        else:
-            pass
 
         # 구, ID, stars, 리뷰
         # result = get_store_review_data(driver)
@@ -137,6 +132,12 @@ def main():
             data.to_csv(
                 "food_reviews.csv", index=False, sep="|", mode="a", header=False
             )
+        if(len(result) != 0):
+            review_num = []
+            review_num.append(place_name[i] + " " + str(len(result)))
+            review_num_data = pd.DataFrame(review_num)
+        else:
+            pass
         
         if not os.path.exists("food_review_num.csv"):
             review_num_data.to_csv("food_review_num.csv", index=False, sep="|", mode="w")
