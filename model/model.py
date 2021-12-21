@@ -22,13 +22,6 @@ class Recommend:
     def __init__(self, path):
         self.dfScore = np.load(path)
 
-    def recommend(self, userScore, listofPoI):
-
-        cos_sim = np.dot(listofPoI, userScore) / (
-            np.linalg.norm(listofPoI, axis=1) * np.linalg.norm(userScore)
-        )
-        return cos_sim
-
 
 class DB:
     def __init__(self, coorPath, scorePath, xl=4, yl=2):
