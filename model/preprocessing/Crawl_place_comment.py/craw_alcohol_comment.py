@@ -102,7 +102,7 @@ def main():
         os.path.join(os.getcwd(), chromedriver_path), options=options)
     
     # r"C:/venvs/travelRecomendation/cafe.csv"
-    df = pd.read_csv('alcohol.csv',
+    df = pd.read_csv('sampled_alcohol.csv',
         encoding="utf-8-sig",
         sep="|",
     )
