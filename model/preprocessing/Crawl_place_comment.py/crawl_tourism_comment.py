@@ -39,7 +39,7 @@ def get_store_review_data(driver, place_info):
             # 더보기 = driver.find_element_by_css_selector('#pane > div > div.widget-pane-content.scrollable-y > div > div > div:nth-child(44) > div > div > button')
             더보기 = driver.find_element_by_css_selector("button[aria-label*='리뷰 더보기']")
             더보기.send_keys(Keys.ENTER)
-            dirver.implicitly_wait(15)
+            driver.implicitly_wait(15)
             # 더보기 = driver.find_element_by_xpath('//*[@id="pane"]/div/div[1]/div/div/div[41]/div/div/button')
             # time.sleep(1)
             # 더보기.click()
@@ -88,7 +88,7 @@ def main():
     #driver = webdriver.Chrome(driverPath)
     options = webdriver.ChromeOptions()
     options.add_argument("lang=ko_KR")
-    #options.add_argument('--headless')  # >> 주석처리해제시 작동창 안나타남
+    options.add_argument('--headless')  # >> 주석처리시 작동창 on
     options.add_argument("--disable-extensions")
     options.add_argument("disable-infobars")
     options.add_argument("window-size=1920x1080")
@@ -116,15 +116,21 @@ def main():
         search_name.append({"subcategory" : subcategory[i], "name": name, "real_name": place_name[i]}) 
 
     for i in range(place_len):
-
+        
         result = start_search(driver, search_name[i])
+        if(len(result) != 0):
+            review_num = []
+            review_num.append(place_name[i] + " " + str(len(result)))
+            review_num_data = pd.DataFrame(review_num)
+        else:
+            pass
 
         # 구, ID, stars, 리뷰
         # result = get_store_review_data(driver)
         data = pd.DataFrame(result)
         # data.columns = ['stars', 'reviews']
         # data.columns = ['stars', 'reviews']
-        # data = pd.concat([search_name[i].get("gu") + search_name[i].get("tourism_id"), data], axis=1)
+        # data = pd.concat([search_name[i].get("gu") + search_name[i].get("cafe_id"), data], axis=1)
         # 누적
         if not os.path.exists("tourism_reviews.csv"):
             data.to_csv("tourism_reviews.csv", index=False, sep="|", mode="w")
@@ -132,7 +138,11 @@ def main():
             data.to_csv(
                 "tourism_reviews.csv", index=False, sep="|", mode="a", header=False
             )
-
+        
+        if not os.path.exists("tourism_review_num.csv"):
+            review_num_data.to_csv("tourism_review_num.csv", index=False, sep="|", mode="w")
+        else:
+            review_num_data.to_csv("tourism_review_num.csv", index=False, sep="|", mode="a", header=False)
 
 if __name__ == "__main__":
     main()
