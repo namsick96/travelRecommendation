@@ -18,9 +18,33 @@ def getLineInfo(coor1, coor2):
     return a, b
 
 
+api_key = "76129b4755674eabb8122486664765ab"
+
+
 class Recommend:
     def __init__(self, path):
         self.dfScore = np.load(path)
+        # all scores are save
+        # categorize: food, bar, (cafe, tourism)
+
+    def recommend(self, score, PoI):
+        pass
+        # to-do 1
+        # [액티비티,식당,...]
+        # score = [0,1,,...]
+        # PoI = [3,11,28,35,...]
+        # dfScore[3] = [0,1,1,...]
+        # recommend function - study!
+
+        # return {3:0.24,11:0.56,...} or [0.24,0.56]
+
+        # to-do 2
+
+        # src - 1,2,3 - dst(src == dst?)
+        # 1,2,3 - tourism
+        # how to recommend - think!
+        # if code implementation is hard, trust me.
+        #
 
 
 class DB:
@@ -34,7 +58,12 @@ class DB:
         return self.pd[key][obj]
 
     def getCoor(self, key):
-        return self.dfCoor[key]["x"], self.dfCoor[key]["y"]
+
+        if type(key) == int:
+
+            return self.dfCoor[key]["x"], self.dfCoor[key]["y"]
+        else:
+            return key
 
     def squareVisitAlg(self, src, dst, mvp=False):
 
@@ -63,7 +92,7 @@ class DB:
     def expandedSquareVisitAlg(self, src, mvp):
 
         results = []
-        mvpCoor = self.getCoor(mvp)
+        mvpCoor = self.getCoorByName(mvp)
 
         listOfPoI = self.getSquarebyTwo(src, mvpCoor)
         scores = self.rS.recommend(listOfPoI)
@@ -91,7 +120,8 @@ class DB:
         return self.idxToNum(results)
 
     def getSquarebyOne(self, place):
-        x, y = self.getCoor(place)
+        x = place[0]
+        y = place[1]
 
         xmin = x - self.xlimit
         xmax = x + self.xlimit
@@ -104,12 +134,10 @@ class DB:
         return result["id"].to_numpy()
 
     def getSquarebyTwo(self, src, dst):
-        x1, y1 = self.getCoor(src)
-        if type(dst) == int:
-            x2, y2 = self.getCoor(dst)
-        else:
-            x2 = dst[0]
-            y2 = dst[1]
+        x1 = src[0]
+        y1 = src[1]
+        x2 = dst[0]
+        y2 = dst[1]
 
         xmin = min(x1, x2)
         xmax = max(x1, x2)
