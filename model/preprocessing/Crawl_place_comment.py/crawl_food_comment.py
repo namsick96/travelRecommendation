@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import requests
+import random from randrange
 
 
 def start_search(driver, place_info):
@@ -20,14 +21,13 @@ def start_search(driver, place_info):
     driver.get(url)
     # result = requests.get(url=url) # 응답
 
-    # search = driver.find_element_by_css_selector("input#searchboxinput.tactile-searchbox-input")
     search = driver.find_element_by_css_selector("#searchboxinput")
-    time.sleep(1)
+    driver.implicitly_wait(10)
 
     search.clear()
     search.send_keys(place_info.get("name"))
     search.send_keys(Keys.ENTER)
-    # driver.implicitly_wait(3)
+    driver.implicitly_wait(10)
 
     return get_store_review_data(driver, place_info)
 
@@ -35,10 +35,11 @@ def start_search(driver, place_info):
 def get_store_review_data(driver, place_info):
     while True:
         try:
-            time.sleep(5)
+            time.sleep(randrange(3,7,1))
             # 더보기 = driver.find_element_by_css_selector('#pane > div > div.widget-pane-content.scrollable-y > div > div > div:nth-child(44) > div > div > button')
             더보기 = driver.find_element_by_css_selector("button[aria-label*='리뷰 더보기']")
             더보기.send_keys(Keys.ENTER)
+            dirver.implicitly_wait(15)
             # 더보기 = driver.find_element_by_xpath('//*[@id="pane"]/div/div[1]/div/div/div[41]/div/div/button')
             # time.sleep(1)
             # 더보기.click()
@@ -46,7 +47,6 @@ def get_store_review_data(driver, place_info):
             print(e)
             break
 
-    # last_height = driver.execute_script("return document.body.scrollHeight")
     for i in range(15):
         # 스크롤 : 마지막까지
         # reviews = driver.find_elements_by_css_selector('span.section-review-text')
@@ -58,13 +58,14 @@ def get_store_review_data(driver, place_info):
         try:
             driver.implicitly_wait(10)
             scrollable_div = driver.find_element_by_css_selector('div.siAUzd-neVct.section-scrollbox.cYB2Ge-oHo7ed.cYB2Ge-ti6hGc')
-            time.sleep(3)
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', scrollable_div)
+            time.sleep(randrange(2,5,1))
+            
         except Exception as e:
             print(e)
             break
 
-        time.sleep(3)
+        time.sleep(randrange(2,6,1))
 
     # 스크롤 끝났으니 수집
     reviews = driver.find_elements_by_xpath('.//span[@class="ODSEW-ShBeI-text"]')
@@ -79,10 +80,6 @@ def get_store_review_data(driver, place_info):
         for star, review in zip(stars, reviews)
     ]
     return result
-
-    # return (stars.get_attribute("aria-label"), reviews.text)
-    # print(stars.get_attribute("aria-label"), reviews.text)
-
 
 def main():
 
