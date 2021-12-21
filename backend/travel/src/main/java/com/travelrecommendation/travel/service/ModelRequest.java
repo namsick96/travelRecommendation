@@ -2,6 +2,7 @@ package com.travelrecommendation.travel.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.travelrecommendation.travel.dto.UserFinalRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -48,6 +49,12 @@ public class ModelRequest {
 
             if (response.getStatusLine().getStatusCode() == 200) {
                 String result = EntityUtils.toString(response.getEntity());
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject=(JsonObject)parser.parse(result);
+                // json Object 파싱하기
+                // code should be added on here
+
+
                 ArrayList<String> answer = new ArrayList<>();
                 answer.add(result);
                 return answer;
