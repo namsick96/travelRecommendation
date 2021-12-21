@@ -5,6 +5,7 @@ import { getTypeResult } from "../reducers/typeResult";
 
 function TypeResult() {
   let [loading, setLoading] = useState(true);
+  let [showResult, setShowResult] = useState(false);
   let state = useSelector((state) => state.typeResult);
   console.log("state");
   console.log(state);
@@ -15,26 +16,26 @@ function TypeResult() {
     getTypeResult().then((result) => {
       dispatch(result);
       setLoading(false);
+      setShowResult(true);
     });
   }, []);
   console.log("data:");
   console.log(state.data);
 
-  const result = [state.data] ?? [];
-  console.log("result:");
-  console.log(result);
-
   return (
     <>
       {/* 요청 성공하면 결과를 화면에 보여주는 코드 */}
       {loading === true ? <Loading></Loading> : null}
-      {loading === false ? <button>결과보기</button> : null}
-      <div>hey {result.userId}</div>
+      {showResult === true ? <Result data={state.data}></Result> : null}
     </>
   );
 }
 
 function Loading() {
   return <div>로딩 중</div>;
+}
+
+function Result(props) {
+  return <div>{props.data.userId}</div>;
 }
 export default TypeResult;
