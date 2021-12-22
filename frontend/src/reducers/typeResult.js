@@ -5,7 +5,7 @@ export const getTypeResult = async (state) => {
   // action객체를 뱉어내는 thunk함수
   try {
     const instance = axios.create({
-      baseURL: "https://3.34.82.24:8080",
+      baseURL: "http://3.34.82.24:8080",
     });
     const typeResult = await instance
       .post(
