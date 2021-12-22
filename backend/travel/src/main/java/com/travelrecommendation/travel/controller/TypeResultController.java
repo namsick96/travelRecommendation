@@ -27,17 +27,17 @@ public class TypeResultController {
         scores.put("healing",0);
         scores.put("activity",0);
 
-        log.info("test_result bean activated");
+//        log.info("test_result bean activated");
 
         for( HashMap<String,Integer> i : request.getAnswer()){
             Set<String> keySet=i.keySet();
             for(String key : keySet){
                 scores.put(key,scores.get(key)+i.get(key));
-                log.info(key);
+//                log.info(key);
             }
         }
 
-        log.info("test result bean activated2");
+//        log.info("test result bean activated2");
 
         int maximum=-100000;
         String biggest="";
@@ -50,7 +50,7 @@ public class TypeResultController {
             }
         }
 
-        log.info("test result bean activated3");
+//        log.info("test result bean activated3");
 
         TypeResult type= new TypeResult();
         type.setType(biggest);
