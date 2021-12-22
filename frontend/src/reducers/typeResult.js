@@ -29,12 +29,12 @@ export const getTypeResult = async (props) => {
         console.log(error);
       });
     return {
-      type: "GET_RESULT_SUCCESS",
+      type: "GET_TYPERESULT_SUCCESS",
       result: typeResult.type,
     };
   } catch (e) {
     return {
-      type: "GET_RESULT_FAILURE",
+      type: "GET_TYPERESULT_FAILURE",
       error: e,
     };
   }
@@ -47,15 +47,14 @@ function typeResult(state = initialState, action) {
       copy.input.push(action.payload);
       console.log(copy);
       return copy;
-    case "GET_RESULT_SUCCESS":
+    case "GET_TYPERESULT_SUCCESS":
       console.log("succeed");
       return {
         ...state,
         result: action.result,
       };
-    case "GET_RESULT_FAILURE":
+    case "GET_TYPERESULT_FAILURE":
       console.log("failed");
-      console.log({ ...state, error: action.error });
       return {
         ...state,
         error: action.error,
