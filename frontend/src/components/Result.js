@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getResult } from "../reducers/place";
 
@@ -12,20 +12,22 @@ function Result() {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    getResult().then((result) => {
+    getResult(state.place).then((result) => {
       dispatch(result);
       setLoading(false);
       setShowResult(true);
     });
   }, []);
-  return;
-  <>
-    {/* 요청 성공하면 결과를 화면에 보여주는 코드 */}
-    {loading === true ? <Loading></Loading> : null}
-    {showResult === true ? (
-      <ResultComponent data={state.data}></ResultComponent>
-    ) : null}
-  </>;
+
+  return (
+    <>
+      <p>최종 결과 페이지</p>
+      {loading === true ? <Loading></Loading> : null}
+      {showResult === true ? (
+        <ResultComponent data={state.data}></ResultComponent>
+      ) : null}
+    </>
+  );
 }
 
 function Loading() {

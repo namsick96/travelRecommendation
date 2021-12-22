@@ -9,13 +9,20 @@ let initialState = {
   result: {},
 };
 
-export const getResult = async () => {
+export const getResult = async (props) => {
   try {
+    console.log("props");
+    console.log(props);
+    const data = JSON.stringify(props);
+    console.log("data");
+    console.log(data);
     const instance = axios.create({
       baseURL: "https://3.34.82.24:8080",
     });
     const finalResult = await instance
-      .post("3.34.82.24:8080/final_result", JSON.stringify(state))
+      .post("/final_result", data, {
+        headers: { "Content-Type": "application/json" },
+      })
       .then((response) => console.log(response)) // 받아온 결과값 변수에 저장해서 Result.js에 넘겨주기
       .catch((error) => console.log(error));
 
@@ -54,11 +61,15 @@ function place(state = initialState, action) {
         mvp: action.key,
       };
     case "GET_FINALRESULT_SUCCESS":
+      console.log("succeed");
+
       return {
         ...state,
         result: action.result,
       };
     case "GET_FINALRESULT_FAILURE":
+      console.log("failed");
+
       return state;
     default:
       return state;
