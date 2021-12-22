@@ -14,7 +14,7 @@ const list = [
   { label: "Option6", value: 5 },
 ];
 
-function GetPlace() {
+function GetMvp() {
   let dispatch = useDispatch();
   let [key, setKey] = useState(0);
 
@@ -43,4 +43,4 @@ function GetPlace() {
     </>
   );
 }
-export default GetPlace;
+export default GetMvp;

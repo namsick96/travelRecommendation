@@ -6,6 +6,28 @@ let initialState = {
   src: { lat: 0, lng: 0 },
   dst: { lat: 0, lng: 0 },
   mvp: 0,
+  result: {},
+};
+
+export const getResult = async () => {
+  try {
+    const instance = axios.create({
+      baseURL: "https://3.34.82.24:8080",
+    });
+    const finalResult = await instance
+      .post("3.34.82.24:8080/final_result", JSON.stringify(state))
+      .then((response) => console.log(response)) // 받아온 결과값 변수에 저장해서 Result.js에 넘겨주기
+      .catch((error) => console.log(error));
+
+    return {
+      type: "GET_FINALRESULT_SUCCESS",
+      result: finalResult,
+    };
+  } catch (e) {
+    return {
+      type: "GET_FINALRESULT_FAILURE",
+    };
+  }
 };
 
 function place(state = initialState, action) {
@@ -31,14 +53,13 @@ function place(state = initialState, action) {
         ...state,
         mvp: action.key,
       };
-    case "POST_PLACES":
-      const instance = axios.create({
-        baseURL: "https://3.34.82.24:8080",
-      });
-      instance
-        .post("3.34.82.24:8080/final_result", JSON.stringify(state))
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+    case "GET_FINALRESULT_SUCCESS":
+      return {
+        ...state,
+        result: action.result,
+      };
+    case "GET_FINALRESULT_FAILURE":
+      return state;
     default:
       return state;
   }
