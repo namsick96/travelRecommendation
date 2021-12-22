@@ -19,11 +19,9 @@ export const getTypeResult = async (props) => {
     console.log("data");
     console.log(data);
     const typeResult = await instance // 데이터를 전송한 다음 받은 유형 정보가 담기는 변수
-      .post(
-        "/type_result",
-        { body: data },
-        { headers: { "Content-Type": "application/json" } }
-      )
+      .post("/type_result", data, {
+        headers: { "Content-Type": "application/json" },
+      })
       .then((response) => console.log(response))
       .catch((error) => {
         console.log(error);
