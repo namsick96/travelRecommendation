@@ -17,7 +17,7 @@ export const getResult = async (props) => {
     console.log("data");
     console.log(data);
     const instance = axios.create({
-      baseURL: "https://3.34.82.24:8080",
+      baseURL: "http://3.34.82.24:8080",
     });
     const finalResult = await instance
       .post("/final_result", data, {
