@@ -1,12 +1,10 @@
 package com.travelrecommendation.travel.controller;
 
 import com.travelrecommendation.travel.dto.TypeResult;
-import com.travelrecommendation.travel.dto.UserFinalRequest;
-import com.travelrecommendation.travel.dto.UserTestResultRequest;
+import com.travelrecommendation.travel.dto.UserTypeResultRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -14,10 +12,10 @@ import java.util.Set;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/type_result")
-public class TestResultController {
+public class TypeResultController {
 
     @PostMapping
-    public TypeResult test_Result(@RequestBody UserTestResultRequest request) throws IllegalAccessException {
+    public TypeResult test_Result(@RequestBody UserTypeResultRequest request) throws IllegalAccessException {
 //        Integer mukVal=request.getQ1().get("muk").getAsInt();
 
         //initialization

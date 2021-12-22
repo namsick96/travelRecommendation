@@ -15,11 +15,8 @@ import java.util.ArrayList;
 public class FinalResultController {
 
     @PostMapping
-    public FinalResult final_result(@RequestBody UserFinalRequest request) throws IOException, InterruptedException {
+    public UserFinalRequest final_result(@RequestBody UserFinalRequest request) throws IOException, InterruptedException {
         ModelRequest modelRequest = new ModelRequest();
-        ArrayList<String> answer= modelRequest.startModel(request);
-        FinalResult finalResult = new FinalResult();
-        finalResult.setRoad(answer);
-        return finalResult;
+        return modelRequest.startModel(request);
     }
 }

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.travelrecommendation.travel.dto.UserFinalRequest;
+import org.apache.catalina.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -25,13 +26,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class ModelRequest {
-    public ArrayList<String> startModel(UserFinalRequest request) throws IOException, InterruptedException {
+    public UserFinalRequest startModel(UserFinalRequest request) throws IOException, InterruptedException {
 
 //        String command ="pwd";//"python3 /Users/jihoonan/Desktop/travelRecommendation/backend/test.py";
 //        위에 command는 예시임.
         // 이 부분 이제 아님. flask랑 통신함.
 
-        String url = "http://3.36.105.244:8081/";
+        String url = "http://52.78.2.120:8081/";
         String sb = "";
         Gson gson = new Gson();
 
@@ -54,9 +55,10 @@ public class ModelRequest {
                 // json Object 파싱하기
                 // code should be added on here
 
-
-                ArrayList<String> answer = new ArrayList<>();
-                answer.add(result);
+                //test용 더미 state return
+                // 나중에 모델 서버에서 받은 값으로 바꾸기.
+                UserFinalRequest answer = new UserFinalRequest();
+                answer.setType("muk");
                 return answer;
 
             } else {
@@ -88,8 +90,8 @@ public class ModelRequest {
 //        }
 //
 //        return tokens;
-        ArrayList<String> answer2 = new ArrayList<>();
-        answer2.add("Error");
-        return null;
+        UserFinalRequest answer2 = new UserFinalRequest();
+        answer2.setType("error");
+        return answer2;
     }
 }
