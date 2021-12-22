@@ -33,8 +33,11 @@ public class TypeResultController {
             Set<String> keySet=i.keySet();
             for(String key : keySet){
                 scores.put(key,scores.get(key)+i.get(key));
+                log.info(key);
             }
         }
+
+        log.info("test result bean activated2");
 
         int maximum=-100000;
         String biggest="";
@@ -46,6 +49,9 @@ public class TypeResultController {
                 maximum=now;
             }
         }
+
+        log.info("test result bean activated3");
+
         TypeResult type= new TypeResult();
         type.setType(biggest);
         return type;
