@@ -9,18 +9,17 @@ function TypeResult() {
   let state = useSelector((state) => state.typeResult);
   console.log("state");
   console.log(state);
+
   let dispatch = useDispatch();
 
   useEffect(() => {
     // 컴포넌트 첫 렌더링 시 서버에 유형 결과 요청해서 받아오는 코드
-    getTypeResult().then((result) => {
+    getTypeResult(state).then((result) => {
       dispatch(result);
       setLoading(false);
       setShowResult(true);
     });
   }, []);
-  console.log("data:");
-  console.log(state.data);
 
   return (
     <>
@@ -36,6 +35,11 @@ function Loading() {
 }
 
 function Result(props) {
-  return <div>{props.data.userId}</div>;
+  return (
+    <div>
+      <p>test</p>
+      {/* {props.data.type} */}
+    </div>
+  );
 }
 export default TypeResult;

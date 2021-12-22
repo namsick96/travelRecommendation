@@ -1,5 +1,3 @@
-import axios from "axios";
-
 let initialState = [];
 
 function typeTest(state = initialState, action) {
@@ -9,15 +7,6 @@ function typeTest(state = initialState, action) {
       copy.push(action.payload);
       console.log(copy);
       return copy;
-    case "POST_ANSWER":
-      console.log("post요청 발생");
-      console.log("요청 시 state값");
-      console.log({ answer: [...state] });
-      axios
-        .post("127.0.0.1:8080/type_result", { answer: [...state] })
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
-      return state;
     default:
       return state;
   }

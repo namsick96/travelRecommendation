@@ -1,17 +1,21 @@
 /* eslint-disable */
 import axios from "axios";
 
-export const getTypeResult = async () => {
+export const getTypeResult = async (state) => {
   // action객체를 뱉어내는 thunk함수
   try {
-    const typeResult = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos/2"
-    );
-    console.log("api 요청 결과");
-    console.log(typeResult);
+    const instance = axios.create({
+      baseURL: "https://3.34.82.24:8080",
+    });
+    const typeResult = await instance
+      .post("/type_result", { answer: { ...state } })
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
     return {
       type: "GET_RESULT_SUCCESS",
-      result: typeResult.data,
+      result: typeResult.type,
     };
   } catch (e) {
     return {
@@ -41,6 +45,8 @@ function typeResult(state = initialState, action) {
         data: action.result,
       };
     case "GET_RESULT_FAILURE":
+      console.log("failed");
+      console.log({ ...state, error: action.error });
       return {
         ...state,
         error: action.error,

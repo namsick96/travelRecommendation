@@ -56,7 +56,7 @@ function GetType() {
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송
             dispatch({ type: "ADD_ANSWER", payload: found.result[answer] });
-            dispatch({ type: "POST_ANSWER" });
+            // dispatch({ type: "POST_ANSWER" });
           }}
         >
           제출하기

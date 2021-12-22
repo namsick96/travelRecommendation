@@ -33,7 +33,7 @@ function place(state = initialState, action) {
       };
     case "POST_PLACES":
       axios
-        .post("127.0.0.1:8080/final_result", state)
+        .post("3.34.82.24:8080/final_result", state)
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
     default:
