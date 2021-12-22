@@ -58,9 +58,9 @@ def get_store_review_data(driver, place_info):
         try:
             driver.implicitly_wait(10)
             scrollable_div = driver.find_element_by_css_selector('div.siAUzd-neVct.section-scrollbox.cYB2Ge-oHo7ed.cYB2Ge-ti6hGc')
-            time.sleep(randrange(3,5,1))
+            # time.sleep(randrange(3,5,1))
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', scrollable_div)
-            time.sleep(randrange(2,5,1))
+            # time.sleep(randrange(2,5,1))
             
         except Exception as e:
             print(e)
@@ -112,7 +112,7 @@ def main():
     place_len = len(place_name)
     search_name = []
     for i in range(place_len):
-        name = place_name[i] + " " + str(place_addr[i][:11]) 
+        name = place_name[i] + " " + str(place_addr[i]) 
         search_name.append({"subcategory" : subcategory[i], "name": name, "real_name": place_name[i]})
 
     for i in range(place_len):

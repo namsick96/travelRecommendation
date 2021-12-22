@@ -58,9 +58,9 @@ def get_store_review_data(driver, place_info):
         try:
             driver.implicitly_wait(10)
             scrollable_div = driver.find_element_by_css_selector('div.siAUzd-neVct.section-scrollbox.cYB2Ge-oHo7ed.cYB2Ge-ti6hGc')
-            time.sleep(randrange(3,5,1))
+            #ime.sleep(randrange(3,5,1))
             driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', scrollable_div)
-            time.sleep(randrange(2,5,1))
+            #time.sleep(randrange(2,5,1))
             
         except Exception as e:
             print(e)
