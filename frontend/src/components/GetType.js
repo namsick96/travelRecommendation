@@ -59,7 +59,7 @@ function GetType() {
             // dispatch({ type: "POST_ANSWER" });
           }}
         >
-          제출하기
+          <Link to="/testresult">제출하기</Link>
         </button>
       ) : null}
     </>

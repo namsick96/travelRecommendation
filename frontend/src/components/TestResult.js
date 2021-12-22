@@ -6,15 +6,13 @@ import { getTypeResult } from "../reducers/typeResult";
 function TypeResult() {
   let [loading, setLoading] = useState(true);
   let [showResult, setShowResult] = useState(false);
-  let state = useSelector((state) => state.typeResult);
-  console.log("state");
-  console.log(state);
+  let state = useSelector((state) => state);
 
   let dispatch = useDispatch();
 
   useEffect(() => {
     // 컴포넌트 첫 렌더링 시 서버에 유형 결과 요청해서 받아오는 코드
-    getTypeResult(state).then((result) => {
+    getTypeResult(state.typeResult.input).then((result) => {
       dispatch(result);
       setLoading(false);
       setShowResult(true);
