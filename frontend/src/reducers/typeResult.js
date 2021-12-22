@@ -12,8 +12,7 @@ export const getTypeResult = async (props) => {
     console.log("props");
     console.log(props);
     const data = JSON.stringify({ answer: props }); // 이 시점에 state.data에 뭐가 들어있지?
-    console.log("data");
-    console.log(data);
+
     const instance = axios.create({
       baseURL: "http://3.34.82.24:8080",
     });
@@ -56,6 +55,7 @@ function typeResult(state = initialState, action) {
       };
     case "GET_RESULT_FAILURE":
       console.log("failed");
+      console.log({ ...state, error: action.error });
       return {
         ...state,
         error: action.error,
