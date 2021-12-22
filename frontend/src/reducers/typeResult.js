@@ -8,7 +8,7 @@ export const getTypeResult = async (state) => {
       baseURL: "https://3.34.82.24:8080",
     });
     const typeResult = await instance
-      .post("/type_result", { answer: { ...state } })
+      .post("/type_result", JSON.stringify({ answer: { ...state } }))
       .then((response) => console.log(response))
       .catch((error) => {
         console.log(error);

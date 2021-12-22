@@ -32,8 +32,11 @@ function place(state = initialState, action) {
         mvp: action.key,
       };
     case "POST_PLACES":
-      axios
-        .post("3.34.82.24:8080/final_result", state)
+      const instance = axios.create({
+        baseURL: "https://3.34.82.24:8080",
+      });
+      instance
+        .post("3.34.82.24:8080/final_result", JSON.stringify(state))
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
     default:
