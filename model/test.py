@@ -1,13 +1,20 @@
 from flask import Flask, request, jsonify
 import model
 
+
 app = Flask(__name__)
+
+dbs = [
+    model.DB("tourism.csv", "score.csv"),
+    model.DB("restaurant.csv", "score.csv"),
+    model.DB("bar.csv", "score.csv"),
+]
 
 
 @app.route("/", methods=["POST"])
 def index():
     content = request.json
-    model.getCourse(content)
+    model.main(content, dbs)
     return jsonify(content)
 
 
