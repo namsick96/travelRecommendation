@@ -10,11 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 public class UserFinalRequest {
-    private int type;
+    private Integer type;
     private HashMap<String,Float> starting;
     private HashMap<String,Float> destination;
     private HashMap<String,Integer> scores;
-    private int mvp;
+    private Integer mvp;
     private String first;
     private String second;
     private String third;

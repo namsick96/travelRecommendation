@@ -47,19 +47,19 @@ public class TypeResultController {
 
         Integer biggestType=-1;
         if (biggest.equals("muk")){
-            biggestType=0;
-        }
-        else if (biggest.equals("healing")){
             biggestType=1;
         }
-        else if (biggest.equals("photo")){
+        else if (biggest.equals("healing")){
             biggestType=2;
         }
-        else if (biggest.equals("activity")){
+        else if (biggest.equals("photo")){
             biggestType=3;
         }
-        else if (biggest.equals("exhibition")){
+        else if (biggest.equals("activity")){
             biggestType=4;
+        }
+        else if (biggest.equals("exhibition")){
+            biggestType=5;
         }
 
 

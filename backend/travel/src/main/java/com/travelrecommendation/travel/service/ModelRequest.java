@@ -54,13 +54,26 @@ public class ModelRequest {
                 String result = EntityUtils.toString(response.getEntity());
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject=(JsonObject)parser.parse(result);
+
+                UserFinalRequest answer = new UserFinalRequest();
+                answer.setType(Integer.getInteger(jsonObject.get("type").getAsString()));
+                answer.setFirst(jsonObject.get("first").getAsString());
+                answer.setSecond(jsonObject.get("second").getAsString());
+                answer.setThird(jsonObject.get("third").getAsString());
+                answer.setRestaurant1(jsonObject.get("restaurant1").getAsString());
+                answer.setRestaurant2(jsonObject.get("restaurant2").getAsString());
+                answer.setRestaurant3(jsonObject.get("restaurant3").getAsString());
+                answer.setAlchol1(jsonObject.get("alchol1").getAsString());
+                answer.setAlchol2(jsonObject.get("alchol2").getAsString());
+                answer.setAlchol3(jsonObject.get("alchol3").getAsString());
+
                 // json Object 파싱하기
                 // code should be added on here
 
                 //test용 더미 state return
                 // 나중에 모델 서버에서 받은 값으로 바꾸기.
-                System.out.println(result);
-                UserFinalRequest answer = new UserFinalRequest();
+//                System.out.println(result);
+
                 return answer;
 
             } else {
