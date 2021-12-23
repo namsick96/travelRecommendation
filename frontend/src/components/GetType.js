@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useParams, useHistory, Link, Route } from "react-router-dom";
-import Questions from "../questions";
+import Questions from "../data/questions";
 import { useSelector, useDispatch } from "react-redux";
 
 function GetType() {

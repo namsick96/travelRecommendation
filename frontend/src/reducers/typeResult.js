@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   input: [],
-  result: "",
+  result: 0,
   error: "",
 };
 export const getTypeResult = async (props) => {
