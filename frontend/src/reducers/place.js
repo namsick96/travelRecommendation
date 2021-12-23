@@ -2,7 +2,8 @@
 import axios from "axios";
 
 let initialState = {
-  type: localStorage.getItem("type"),
+  // type: JSON.parse(localStorage.getItem("obj")).type,
+  // score: JSON.parse(localStorage.getItem("obj")).score,
   src: { lat: 0, lng: 0 },
   dst: { lat: 0, lng: 0 },
   mvp: 0,

@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   input: [],
   result: 0,
+  score: {},
   error: "",
 };
 export const getTypeResult = async (props) => {
@@ -22,14 +23,15 @@ export const getTypeResult = async (props) => {
       .post("/type_result", data, {
         headers: { "Content-Type": "application/json" },
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+      })
       .catch((error) => {
         console.log(error);
       });
-    localStorage.setItem("type", typeResult.type);
     return {
       type: "GET_TYPERESULT_SUCCESS",
-      result: typeResult.type,
+      result: typeResult,
     };
   } catch (e) {
     return {
@@ -48,12 +50,14 @@ function typeResult(state = initialState, action) {
       return copy;
     case "GET_TYPERESULT_SUCCESS":
       console.log("succeed");
+      console.log(action.result);
       return {
         ...state,
         result: action.result,
       };
     case "GET_TYPERESULT_FAILURE":
       console.log("failed");
+      console.log(action.error);
       return {
         ...state,
         error: action.error,
