@@ -1,11 +1,9 @@
 /* eslint-disable */
 import axios from "axios";
 
-let temp = JSON.parse(localStorage.getItem("obj"));
-
 let initialState = {
-  type: temp.type,
-  scores: temp.scores,
+  type: 0,
+  scores: {},
   src: { lat: 0, lng: 0 },
   dst: { lat: 0, lng: 0 },
   mvp: 0,
@@ -37,6 +35,13 @@ export const getResult = async (props) => {
 
 function place(state = initialState, action) {
   switch (action.type) {
+    case "ADD_USER_INFO":
+      console.log("userinfo dispatch happend!");
+      return {
+        ...state,
+        type: action.testType,
+        scores: action.scores,
+      };
     case "ADD_SRC":
       console.log("src dispatch happend!");
       console.log({ ...state, src: { lat: action.lat, lng: action.lng } });

@@ -19,7 +19,6 @@ export const getTypeResult = async (props) => {
         headers: { "Content-Type": "application/json" },
       });
     console.log(typeResult.data);
-    localStorage.setItem("obj", JSON.stringify(typeResult.data));
     return {
       type: "GET_TYPERESULT_SUCCESS",
       payload: typeResult.data,

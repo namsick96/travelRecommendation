@@ -52,7 +52,15 @@ function Result(props) {
     <div>
       <h1>{props.data.title}</h1>
       <p>{props.data.description}</p>
-      <button>
+      <button
+        onClick={() => {
+          dispatch({
+            type: "ADD_USER_INFO",
+            testType: state.typeResult.result.type,
+            scores: state.typeResult.result.scores,
+          });
+        }}
+      >
         <Link to="/src">여행코스 추천받기</Link>
       </button>
     </div>

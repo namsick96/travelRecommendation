@@ -13,9 +13,6 @@ import GetMvp from "./components/GetMvp";
 import { useEffect } from "react";
 
 function App() {
-  useEffect(() => {
-    localStorage.setItem("obj", { type: 0, scores: {} });
-  }, []);
   return (
     <div className="App">
       <Switch>
