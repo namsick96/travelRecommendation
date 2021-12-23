@@ -1,9 +1,11 @@
 /* eslint-disable */
 import axios from "axios";
 
+let temp = JSON.parse(localStorage.getItem("obj"));
+
 let initialState = {
-  // type: JSON.parse(localStorage.getItem("obj")).type,
-  // score: JSON.parse(localStorage.getItem("obj")).score,
+  type: temp.type,
+  scores: temp.scores,
   src: { lat: 0, lng: 0 },
   dst: { lat: 0, lng: 0 },
   mvp: 0,
@@ -12,24 +14,19 @@ let initialState = {
 
 export const getResult = async (props) => {
   try {
-    console.log("props");
-    console.log(props);
     const data = JSON.stringify(props);
     console.log("data");
     console.log(data);
     const instance = axios.create({
       baseURL: "http://3.34.82.24:8080",
     });
-    const finalResult = await instance
-      .post("/final_result", data, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => console.log(response)) // 받아온 결과값 변수에 저장해서 Result.js에 넘겨주기
-      .catch((error) => console.log(error));
-
+    const finalResult = await instance.post("/final_result", data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log(finalResult.data);
     return {
       type: "GET_FINALRESULT_SUCCESS",
-      result: finalResult,
+      result: finalResult.data,
     };
   } catch (e) {
     return {
