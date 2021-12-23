@@ -12,6 +12,7 @@ import GetDst from "./components/GetDst";
 import GetMvp from "./components/GetMvp";
 
 function App() {
+  localStorage.setItem("obj", { type: 0, scores: {} });
   return (
     <div className="App">
       <Switch>
