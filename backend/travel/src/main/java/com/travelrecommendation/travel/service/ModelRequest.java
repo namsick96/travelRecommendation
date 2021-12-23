@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.travelrecommendation.travel.dto.UserFinalRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ModelRequest {
     public UserFinalRequest startModel(UserFinalRequest request) throws IOException, InterruptedException {
@@ -57,8 +59,8 @@ public class ModelRequest {
 
                 //test용 더미 state return
                 // 나중에 모델 서버에서 받은 값으로 바꾸기.
+                System.out.println(result);
                 UserFinalRequest answer = new UserFinalRequest();
-                answer.setType("muk");
                 return answer;
 
             } else {
@@ -91,7 +93,7 @@ public class ModelRequest {
 //
 //        return tokens;
         UserFinalRequest answer2 = new UserFinalRequest();
-        answer2.setType("error");
+        answer2.setType(1);
         return answer2;
     }
 }
