@@ -2,7 +2,7 @@
 
 import React, { useState,useEffect } from "react";
 import { useParams, useHistory, Link, Route } from "react-router-dom";
-import Questions from "../questions";
+import Questions from "../data/questions";
 import { useSelector, useDispatch } from "react-redux";
 import "../css/Type.css";
 
@@ -62,10 +62,10 @@ function GetType() {
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송
             dispatch({ type: "ADD_ANSWER", payload: found.result[answer] });
-            dispatch({ type: "POST_ANSWER" });
+            // dispatch({ type: "POST_ANSWER" });
           }}
         >
-          제출하기
+          <Link to="/testresult">제출하기</Link>
         </button>
       ) : null}
     </>

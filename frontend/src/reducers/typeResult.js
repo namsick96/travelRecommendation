@@ -1,46 +1,63 @@
 /* eslint-disable */
 import axios from "axios";
 
-export const getTypeResult = async () => {
+const initialState = {
+  input: [],
+  result: 0,
+  score: {},
+  error: "",
+};
+export const getTypeResult = async (props) => {
   // action객체를 뱉어내는 thunk함수
   try {
-    const typeResult = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos/2"
-    );
-    console.log("api 요청 결과");
-    console.log(typeResult);
+    console.log("props");
+    console.log(props);
+    const data = JSON.stringify({ answer: props }); // 이 시점에 state.data에 뭐가 들어있지?
+
+    const instance = axios.create({
+      baseURL: "http://3.34.82.24:8080",
+    });
+    console.log("data");
+    console.log(data);
+    const typeResult = await instance // 데이터를 전송한 다음 받은 유형 정보가 담기는 변수
+      .post("/type_result", data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     return {
-      type: "GET_RESULT_SUCCESS",
-      result: typeResult.data,
+      type: "GET_TYPERESULT_SUCCESS",
+      result: typeResult,
     };
   } catch (e) {
     return {
-      type: "GET_RESULT_FAILURE",
+      type: "GET_TYPERESULT_FAILURE",
       error: e,
     };
   }
 };
 
-const initialState = {
-  loading: false,
-  data: null,
-  error: null,
-};
-
 function typeResult(state = initialState, action) {
   switch (action.type) {
-    case "GET_RESULT":
-      return {
-        ...state,
-        loading: true,
-      };
-    case "GET_RESULT_SUCCESS":
+    case "ADD_ANSWER":
+      let copy = { ...state };
+      copy.input.push(action.payload);
+      console.log(copy);
+      return copy;
+    case "GET_TYPERESULT_SUCCESS":
       console.log("succeed");
+      console.log(action.result);
       return {
         ...state,
-        data: action.result,
+        result: action.result,
       };
-    case "GET_RESULT_FAILURE":
+    case "GET_TYPERESULT_FAILURE":
+      console.log("failed");
+      console.log(action.error);
       return {
         ...state,
         error: action.error,

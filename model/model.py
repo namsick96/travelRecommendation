@@ -164,19 +164,21 @@ class DB:
 
 def getCourse(input):
 
-    db = DB("data.csv")
-
+    #db = DB("data.csv") 안지훈이 테스트 하려고 일단 주석처리함. 대규 나중에 풀어줘.
+    print(input)
     dst, src, mvp = 1, 2, 3
 
-    if dst == src:
-        if len(mvp) == 0:
-            result = db.greedyVisitAlg(src)
-        else:
-            result = db.expandedSquareVisitAlg(src, mvp)
-    else:
-        if len(mvp) == 0:
-            result = db.squareVisitAlg(src, dst)
-        else:
-            result = db.squareVisitAlg(src, dst, mvp)
+    # if dst == src:
+    #     if len(mvp) == 0:
+    #         result = db.greedyVisitAlg(src)
+    #     else:
+    #         result = db.expandedSquareVisitAlg(src, mvp)
+    # else:
+    #     if len(mvp) == 0:
+    #         result = db.squareVisitAlg(src, dst)
+    #     else:
+    #         result = db.squareVisitAlg(src, dst, mvp)
+
+    result = {"courses": [(1, 1), (0, 2), (3, 4),(5, 6), (3, 1)]}
 
     return result

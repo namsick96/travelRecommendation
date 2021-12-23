@@ -2,10 +2,40 @@
 import axios from "axios";
 
 let initialState = {
-  type: "",
+  // type: JSON.parse(localStorage.getItem("obj")).type,
+  // score: JSON.parse(localStorage.getItem("obj")).score,
   src: { lat: 0, lng: 0 },
   dst: { lat: 0, lng: 0 },
   mvp: 0,
+  result: {},
+};
+
+export const getResult = async (props) => {
+  try {
+    console.log("props");
+    console.log(props);
+    const data = JSON.stringify(props);
+    console.log("data");
+    console.log(data);
+    const instance = axios.create({
+      baseURL: "http://3.34.82.24:8080",
+    });
+    const finalResult = await instance
+      .post("/final_result", data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => console.log(response)) // 받아온 결과값 변수에 저장해서 Result.js에 넘겨주기
+      .catch((error) => console.log(error));
+
+    return {
+      type: "GET_FINALRESULT_SUCCESS",
+      result: finalResult,
+    };
+  } catch (e) {
+    return {
+      type: "GET_FINALRESULT_FAILURE",
+    };
+  }
 };
 
 function place(state = initialState, action) {
@@ -31,11 +61,15 @@ function place(state = initialState, action) {
         ...state,
         mvp: action.key,
       };
-    case "POST_PLACES":
-      axios
-        .post("127.0.0.1:8080/final_result", state)
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+    case "GET_FINALRESULT_SUCCESS":
+      console.log("succeed");
+      return {
+        ...state,
+        result: action.result,
+      };
+    case "GET_FINALRESULT_FAILURE":
+      console.log("failed");
+      return state;
     default:
       return state;
   }
