@@ -26,6 +26,7 @@ export const getTypeResult = async (props) => {
       .catch((error) => {
         console.log(error);
       });
+    localStorage.setItem("type", typeResult.type);
     return {
       type: "GET_TYPERESULT_SUCCESS",
       result: typeResult.type,

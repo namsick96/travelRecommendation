@@ -2,7 +2,7 @@
 import axios from "axios";
 
 let initialState = {
-  type: "",
+  type: localStorage.getItem("type"),
   src: { lat: 0, lng: 0 },
   dst: { lat: 0, lng: 0 },
   mvp: 0,
@@ -62,14 +62,12 @@ function place(state = initialState, action) {
       };
     case "GET_FINALRESULT_SUCCESS":
       console.log("succeed");
-
       return {
         ...state,
         result: action.result,
       };
     case "GET_FINALRESULT_FAILURE":
       console.log("failed");
-
       return state;
     default:
       return state;
