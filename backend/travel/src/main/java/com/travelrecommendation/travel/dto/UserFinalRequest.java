@@ -13,8 +13,15 @@ public class UserFinalRequest {
     private int type;
     private HashMap<String,Float> starting;
     private HashMap<String,Float> destination;
+    private HashMap<String,Integer> scores;
     private int mvp;
     private String first;
     private String second;
     private String third;
+    private String restaurant1;
+    private String restaurant2;
+    private String restaurant3;
+    private String alchol1;
+    private String alchol2;
+    private String alchol3;
 }

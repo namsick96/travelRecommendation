@@ -4,9 +4,12 @@ package com.travelrecommendation.travel.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashMap;
+
 @Getter
 @Setter
 public class TypeResult {
 
-    private String type;
+    private Integer type;
+    private HashMap<String,Integer> scores;
 }
