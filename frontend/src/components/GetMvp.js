@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import '../css/Mvp.css';
 
 const list = [
   // label, value 형식은 지켜야 함
@@ -14,7 +15,7 @@ const list = [
   { label: "Option6", value: 5 },
 ];
 
-function GetPlace() {
+function GetMvp() {
   let dispatch = useDispatch();
   let [key, setKey] = useState(0);
 
@@ -25,22 +26,24 @@ function GetPlace() {
 
   return (
     <>
-      <div className="selection">
-        <Select
+      <h4 className="bar">여기 올레</h4>
+      <h3 className="rec">꼭 방문하고 싶은 PLACE를 골라주세요</h3>
+      <div className="selection1">
+        <Select 
           options={list}
           placeholder="장소를 입력해주세요"
           value={list.find((obj) => obj.value === key)}
           onChange={handleChange}
         />
-        <button
+        <button className="button1"
           onClick={() => {
             dispatch({ type: "ADD_MVP", key: key });
           }}
         >
-          <Link to="/dst">입력하기</Link>
+          <Link to="/dst"  style={{ textDecoration: 'none' , color: 'white'}}>선택완료</Link>
         </button>
       </div>
     </>
   );
 }
-export default GetPlace;
+export default GetMvp;

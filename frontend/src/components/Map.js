@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import "../css/Map.css"
 
 function Map(props) {
   let dispatch = useDispatch();
@@ -18,14 +19,13 @@ function Map(props) {
       kakao.maps.load(() => {
         let container = document.getElementById("map");
         let options = {
-          center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-          level: 3,
+          center: new kakao.maps.LatLng(33.366589, 126.542296),
+          level: 10,
         };
         let map = new kakao.maps.Map(container, options);
         // 마커가 표시될 위치입니다
         let markerPosition = new kakao.maps.LatLng(
-          33.499595189959116,
-          126.5310760577315
+          33.366589, 126.542296
         );
 
         // 마커를 생성합니다
@@ -57,14 +57,14 @@ function Map(props) {
 
   return (
     <>
-      <div id="map" style={{ width: "500px", height: "400px" }}></div>
-      <button
+      <div id="map" style={{ width: "870px", height: "430px" , borderRadius:'20px', left:"43vh"}}></div>
+      <button className="button4"
         onClick={() => {
           dispatch({ type: `ADD_${props.type}`, lat: place.x, lng: place.y });
         }}
       >
-        {props.type === "SRC" ? <Link to="/mvp">입력하기</Link> : null}
-        {props.type === "DST" ? <Link to="/result">결과 확인</Link> : null}
+        {props.type === "SRC" ? <Link to="/mvp" style={{ textDecoration: 'none' , color: '#F4A644'}} >입력하기</Link> : null}
+        {props.type === "DST" ? <Link to="/result"  style={{ textDecoration: 'none' , color: '#F4A644'}}>결과 확인</Link> : null}
       </button>
     </>
   );

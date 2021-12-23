@@ -1,9 +1,10 @@
 /* eslint-disable */
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useParams, useHistory, Link, Route } from "react-router-dom";
 import Questions from "../questions";
 import { useSelector, useDispatch } from "react-redux";
+import "../css/Type.css";
 
 function GetType() {
   let { id } = useParams();
@@ -15,14 +16,19 @@ function GetType() {
   return (
     <>
       <div className="content">
-        <h3>{found.question}</h3>
+        <h4 className="bar">여기 올레</h4>
+        <div className="container">
+        <h2 className="num">Q{id}.</h2>
+        <h3 className="question">{found.question}</h3>
+        </div>
         {found.answer.map((a, i) => {
           return (
             <div key={i}>
-              <button
+              <button className="selection selection2" 
                 onClick={() => {
                   setAnswer(i);
                 }}
+                
               >
                 {a}
               </button>
@@ -32,27 +38,27 @@ function GetType() {
         })}
       </div>
       {id != 0 ? (
-        <button
+        <button className="back button2"
           onClick={() => {
             history.goBack();
           }}
         >
-          뒤로가기
+          이전으로
         </button>
       ) : null}
 
       {id != 12 ? (
-        <button
+        <button className="next button3"
           onClick={() => {
             // 문항별 응답 store에 저장
             dispatch({ type: "ADD_ANSWER", payload: found.result[answer] }); // found 중 사용자가 고른 선지에 해당하는 r값을 전송
           }}
         >
-          <Link to={`/test/${parseInt(id) + 1}`}>다음 문제</Link>
+          <Link to={`/test/${parseInt(id) + 1}`} style={{ textDecoration: 'none' , color: 'white'}}>다음으로</Link>
         </button>
       ) : null}
       {id == 12 ? (
-        <button
+        <button className="next button3"
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송
             dispatch({ type: "ADD_ANSWER", payload: found.result[answer] });

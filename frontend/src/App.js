@@ -13,7 +13,6 @@ import GetMvp from "./components/GetMvp";
 function App() {
   return (
     <div className="App">
-      <h2>navbar</h2>
       <Switch>
         <Route exact path="/" component={Home}></Route>
         <Route path="/test/:id" component={GetType}></Route>
