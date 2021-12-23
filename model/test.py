@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import model
 import json
-from collections import OrderDict
 
 app = Flask(__name__)
 
