@@ -1,1 +1,6 @@
 chromedriver
+model/.DS_Store
+.gitignore
+backend/travel/src/test/java/com/.DS_Store
+backend/travel/src/main/java/com/.DS_Store
+.DS_Store
