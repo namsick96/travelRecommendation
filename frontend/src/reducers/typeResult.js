@@ -27,7 +27,7 @@ export const getTypeResult = async (props) => {
   } catch (e) {
     return {
       type: "GET_TYPERESULT_FAILURE",
-      status: false,
+      status: false, 
     };
   }
 };

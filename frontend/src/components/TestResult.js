@@ -68,6 +68,7 @@ function Result(props) {
   return (
     <div className="">
       <h1>{props.data.title}</h1>
+      <h4>{props.data.hastag}</h4>
       <p>{props.data.description}</p>
       <button>
         <Link
