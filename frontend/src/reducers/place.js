@@ -2,34 +2,29 @@
 import axios from "axios";
 
 let initialState = {
-  // type: JSON.parse(localStorage.getItem("obj")).type,
-  // score: JSON.parse(localStorage.getItem("obj")).score,
-  src: { lat: 0, lng: 0 },
-  dst: { lat: 0, lng: 0 },
+  type: 0,
+  scores: {},
+  starting: { lat: 0, lng: 0 },
+  destination: { lat: 0, lng: 0 },
   mvp: 0,
   result: {},
 };
 
 export const getResult = async (props) => {
   try {
-    console.log("props");
-    console.log(props);
     const data = JSON.stringify(props);
     console.log("data");
     console.log(data);
     const instance = axios.create({
       baseURL: "http://3.34.82.24:8080",
     });
-    const finalResult = await instance
-      .post("/final_result", data, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => console.log(response)) // 받아온 결과값 변수에 저장해서 Result.js에 넘겨주기
-      .catch((error) => console.log(error));
-
+    const finalResult = await instance.post("/final_result", data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log(finalResult.data);
     return {
       type: "GET_FINALRESULT_SUCCESS",
-      result: finalResult,
+      result: finalResult.data,
     };
   } catch (e) {
     return {
@@ -40,19 +35,29 @@ export const getResult = async (props) => {
 
 function place(state = initialState, action) {
   switch (action.type) {
-    case "ADD_SRC":
-      console.log("src dispatch happend!");
-      console.log({ ...state, src: { lat: action.lat, lng: action.lng } });
+    case "ADD_USER_INFO":
+      console.log("userinfo dispatch happend!");
       return {
         ...state,
-        src: { lat: action.lat, lng: action.lng },
+        type: action.testType,
+        scores: action.scores,
+      };
+    case "ADD_SRC":
+      console.log("src dispatch happend!");
+      console.log({ ...state, starting: { lat: action.lat, lng: action.lng } });
+      return {
+        ...state,
+        starting: { lat: action.lat, lng: action.lng },
       };
     case "ADD_DST":
       console.log("dst dispatch happend!");
-      console.log({ ...state, dst: { lat: action.lat, lng: action.lng } });
+      console.log({
+        ...state,
+        destination: { lat: action.lat, lng: action.lng },
+      });
       return {
         ...state,
-        dst: { lat: action.lat, lng: action.lng },
+        destination: { lat: action.lat, lng: action.lng },
       };
     case "ADD_MVP":
       console.log("mvp dispatch happend!");

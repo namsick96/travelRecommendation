@@ -10,6 +10,7 @@ import TestStart from "./components/TestStart";
 import GetSrc from "./components/GetSrc";
 import GetDst from "./components/GetDst";
 import GetMvp from "./components/GetMvp";
+import { useEffect } from "react";
 
 function App() {
   return (

@@ -24,7 +24,7 @@ function Result() {
       <p>최종 결과 페이지</p>
       {loading === true ? <Loading></Loading> : null}
       {showResult === true ? (
-        <ResultComponent data={state.data}></ResultComponent>
+        <ResultComponent data={state.result}></ResultComponent>
       ) : null}
     </>
   );
@@ -35,6 +35,7 @@ function Loading() {
 }
 
 function ResultComponent(props) {
+  console.log(props);
   return (
     <div>
       <p>test</p>
