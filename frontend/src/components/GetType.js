@@ -12,7 +12,7 @@ function GetType() {
   let found = Questions.find((x) => x.id == id);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [answer, setAnswer] = useState(0);
+  let [answer, setAnswer] = useState(-1);
 
   return (
     <>
@@ -29,7 +29,7 @@ function GetType() {
                 onClick={() => {
                   setAnswer(i);
                 }}
-                
+                style={i===answer ? { background:'#F4A644'} : null}
               >
                 {a}
               </button>
