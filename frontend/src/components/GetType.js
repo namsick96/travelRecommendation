@@ -19,13 +19,13 @@ function GetType() {
       <div className="content">
         <h4 className="bar" style={{fontFamily : 'WandohopeR'}}>여기 올레</h4>
         <div className="container">
-        <h2 className="num">Q{id}.</h2>
-        <h3 className="question">{found.question}</h3>
+        <h2 className="num" style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>Q{id}.</h2>
+        <h3 className="question" style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>{found.question}</h3>
         </div>
         {found.answer.map((a, i) => {
           return (
             <div key={i}>
-              <button className="selection selection2" 
+              <button className="selection selection2" style={{fontFamily: 'paybooc-Bold'}}
                 onClick={() => {
                   setAnswer(i);
                 }}
@@ -39,7 +39,7 @@ function GetType() {
         })}
       </div>
       {id != 0 ? (
-        <button className="back button2"
+        <button className="back button2" style={{fontFamily: 'Cafe24SsurroundAir'}}
           onClick={() => {
             history.goBack();
           }}
@@ -55,7 +55,7 @@ function GetType() {
             dispatch({ type: "ADD_ANSWER", payload: found.result[answer] }); // found 중 사용자가 고른 선지에 해당하는 r값을 전송
           }}
         >
-          <Link to={`/test/${parseInt(id) + 1}`} style={{ textDecoration: 'none' , color: 'white'}}>다음으로</Link>
+          <Link to={`/test/${parseInt(id) + 1}`} style={{ textDecoration: 'none' , color: 'white', fontFamily: 'Cafe24SsurroundAir'}}>다음으로</Link>
         </button>
       ) : null}
       {id == 12 ? (
@@ -66,7 +66,7 @@ function GetType() {
             // dispatch({ type: "POST_ANSWER" });
           }}
         >
-          <Link to="/testresult" style={{ textDecoration: 'none' , color: 'white'}}>제출하기</Link>
+          <Link to="/testresult" style={{ textDecoration: 'none' , color: 'white', fontFamily: 'Cafe24SsurroundAir'}}>제출하기</Link>
         </button>
       ) : null}
     </>

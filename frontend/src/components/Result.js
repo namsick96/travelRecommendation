@@ -3,7 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getResult } from "../reducers/place";
+import "../css/loading.css";
+import loading from "../css/loading.png";
+import marker from "../css/maker.png";
 import font from "../font/font.css";
+
 
 function Result() {
   let [loading, setLoading] = useState(true);
@@ -22,7 +26,7 @@ function Result() {
 
   return (
     <>
-      <p>최종 결과 페이지</p>
+       <h3 className="bar" style={{fontFamily : 'WandohopeR'}}>여기올레</h3>
       {loading === true ? <Loading></Loading> : null}
       {showResult === true ? (
         <ResultComponent data={state.place.result.result}></ResultComponent>
@@ -32,7 +36,14 @@ function Result() {
 }
 
 function Loading() {
-  return <div>로딩 중</div>;
+  return( 
+      <div className="testcont">
+      <div className="cont">
+      <div className="load"  style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>#로딩 중</div>
+       <img className="loading2" src={loading}></img>
+      </div></div>
+    
+    );
 }
 
 function ResultComponent(props) {
@@ -44,30 +55,30 @@ function ResultComponent(props) {
   console.log(alchol);
 
   
-  [...places].unshift('출발지');
-  [...places].push('도착지');
-  
   return (
     <div>
-      <p>test</p>
-      <div className="course">
+      <div>여기올레?  <span>가 추천하는 여행 코스</span></div>
+      <img className="marker1" src={marker}></img><img className="marker3"  src={marker}></img>
+      <hr className="vector"></hr>
+      <div>  <span className="sp">출발지</span>
       {
         places.map((place,i)=> {
-          return <div key={i}>{place}</div>
+          return <span className="course" key={i}><img className="marker2"  src={marker}></img> {place}</span>
         })
       }
+      <span className="dt">도착지</span>
       </div>
-      <div className="restaurant">
+      <div >
       {
         restaurant.map((place, i)=> {
-          return <div key={i}>{place}</div>
+          return <span key={i} className="restaurant">{place}</span>
         })
       }
       </div>
-      <div className="alchol">
+      <div>
       {      
         alchol.map((place, i)=> {
-          return <div key={i}>{place}</div>
+          return <span key={i}  className="alchol">{place}</span>
         })
       }
       </div>

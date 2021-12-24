@@ -64,8 +64,8 @@ function Map(props) {
           dispatch({ type: `ADD_${props.type}`, lat: place.x, lng: place.y });
         }}
       >
-        {props.type === "SRC" ? <Link to="/mvp" style={{ textDecoration: 'none' , color: '#F4A644'}} >입력하기</Link> : null}
-        {props.type === "DST" ? <Link to="/result"  style={{ textDecoration: 'none' , color: '#F4A644'}}>결과 확인</Link> : null}
+        {props.type === "SRC" ? <Link to="/mvp" style={{ textDecoration: 'none' , color: '#F4A644', fontFamily: 'Cafe24SsurroundAir'}} >입력하기</Link> : null}
+        {props.type === "DST" ? <Link to="/result"  style={{ textDecoration: 'none' , color: '#F4A644', fontFamily: 'Cafe24SsurroundAir'}}>결과 확인</Link> : null}
       </button>
     </>
   );

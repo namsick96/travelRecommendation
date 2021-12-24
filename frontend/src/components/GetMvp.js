@@ -35,7 +35,7 @@ function GetMvp() {
   return (
     <>
       <h4 className="bar" style={{fontFamily : 'WandohopeR'}}>여기 올레</h4>
-      <h3 className="rec">꼭 방문하고 싶은 PLACE를 골라주세요</h3>
+      <h3 className="rec" style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>꼭 방문하고 싶은 PLACE를 골라주세요</h3>
       <div className="selection1">
         <Select
           options={list}
@@ -49,7 +49,7 @@ function GetMvp() {
             dispatch({ type: "ADD_MVP", key: key });
           }}
         >
-          <Link to="/dst" style={{ textDecoration: "none", color: "white" }}>
+          <Link to="/dst" style={{ textDecoration: "none", color: "white" ,fontFamily: 'Cafe24SsurroundAir'}}>
             선택완료
           </Link>
         </button>

@@ -8,6 +8,7 @@
     color: #F4A644;
     font-size: 27px;
     height: 6vh;
+
 }
 .testcont{
     margin-top: 0px;
@@ -51,6 +52,7 @@
     width: 12vw;
     border-radius: 8px;
     font-weight: bold;
+    letter-spacing: 1.2px;
     background-color: #007A0A;
     color: white;
     border: 2px solid #007A0A;

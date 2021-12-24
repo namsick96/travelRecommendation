@@ -32,7 +32,7 @@ function TypeResult() {
       {/* 요청 성공하면 결과를 화면에 보여주는 코드 */}
       {loading === true ? <Loading></Loading> : null}
       {showButton === true ? (
-        <button className="button7"
+        <button className="button7" style={{fontFamily: 'Cafe24SsurroundAir'}}
           onClick={() => {
             setLoading(false);
             setShowButton(false);
@@ -58,7 +58,7 @@ function Loading() {
   return (
   <div>
   <h1 className="hashtag">#</h1>
-  <div className="loading">테스트 결과 로딩 중</div>
+  <div className="loading" style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>테스트 결과 로딩 중</div>
   <img className="jihoon" src={jeju}></img>
   </div>
   )
@@ -70,7 +70,7 @@ function Result(props) {
       <h1>{props.data.title}</h1>
       <p>{props.data.description}</p>
       <button>
-        <Link
+        <Link 
           onClick={() => {
             props.dispatch({
               type: "ADD_USER_INFO",

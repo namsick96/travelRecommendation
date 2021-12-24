@@ -1,0 +1,121 @@
+.bar{
+    border: 0px;
+    margin: 0px;
+    padding-top: 2vh;
+    border-color: #F4A644;
+    background-color: #F4A644;
+    color: white;
+    font-size: 27px;
+    height: 6vh;
+    font-family: 'WandohopeR';
+  }
+
+.testcont{
+    margin-top: 0px;
+    background-color: #F4A644;
+    width :100%;
+    height: 92vh;
+
+}
+
+.cont{
+    position: absolute;
+    left: 34vw;
+    top: 14vh;
+    width: 30vw;
+    height: 70vh;
+    border-radius: 10%;
+    background-color: white;
+}
+
+.load{
+    position: absolute;
+    font-size: 36px;
+    top : 17vh;
+    left: 10.4vw;
+    font-weight: bolder;
+
+}
+
+.loading2{
+    position: absolute;
+    width: 15vh;
+    top : 32vh;
+    left: 11.7vw;
+}
+
+.course{
+    padding: 1vh;
+    border: solid #007A0A;
+    border-radius: 8px;
+    position: relative;
+    left: -7vw;
+    top: 29vh;
+    margin-left: 30vh;
+}
+
+.sp{
+    padding: 1vh;
+    border-radius: 8px;
+    border: solid #007A0A;
+    position: absolute;
+    left: 10vw;
+    top:39vh;
+
+}
+
+.dt{
+    border-radius: 8px;
+    padding: 1vh;
+    border: solid #007A0A;
+    position: absolute;
+    right: 10vw;
+    top:39vh;
+}
+
+.vector{
+    position: absolute;
+    top: 35vh;
+    left: 10vw;
+    width: 80vw;
+    border-top:6px;
+    border : solid  #007A0A;
+
+}
+
+.marker1{
+    position: absolute;
+    width: 4vw;
+    left: 10vw;
+    top: 27vh;
+}
+
+.marker2{
+    position: absolute;
+    width: 4vw;
+    top: -12vh;
+
+}
+
+.marker3{
+    position: absolute;
+    right: 10vw;
+    width: 4vw;
+    top: 27vh;   
+}
+
+.restaurant{
+    border : solid  #007A0A;
+    border-radius: 8px;
+    padding: 1vh;
+    position: relative;
+    top:40vh;
+    margin-bottom: 10px;
+}
+
+.alchol{
+    border : solid  #007A0A;
+    border-radius: 8px;
+    padding: 1vh;
+ 
+}
