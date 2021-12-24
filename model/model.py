@@ -6,6 +6,23 @@ import math
 import json
 
 
+def decomposeInput(input):
+
+    dst = input["destination"]
+    lst_dst = list(dst.values())
+    lst_mvp = input["mvp"]
+    userScore = input["scores"]
+    lst_userScore = list(userScore.values())
+    src = input["starting"]
+    lst_src = list(src.values())
+
+    iC = [lst_dst, lst_src, lst_mvp, lst_userScore]
+    iR = [lst_dst, lst_src, lst_userScore]
+    iB = [lst_dst, lst_userScore]
+
+    return (iC, iR, iB)
+
+
 def getL2Distance(coor1, coor2):
 
     return math.sqrt((coor1[0] - coor2[0]) ** 2 + (coor1[1] - coor2[1]) ** 2)
@@ -18,39 +35,77 @@ def getLineInfo(coor1, coor2):
     return a, b
 
 
+def getLineDistance(x, y, a, b):
+
+    return abs(a * x - y + b) / (a ** 2 + b ** 2) ** 0.5
+
+
 class Recommend:
     def __init__(self, path):
-        self.dfScore = np.load(path)
+        try:
+            self.dfScore = pd.read_csv(path, encoding="cp949")
+        except:
+            self.dfScore = pd.read_csv(path, encoding="utf-8")
 
-    def recommend(self, userScore, listofPoI):
+        # self.dfScore = self.dfScore.dropna(axis=0)
+        # PoI = [1,2,5,7]
+        # self.dfScore[1] = 1의점수
+        # self.dfScore[5] = 5의점수
 
-        cos_sim = np.dot(listofPoI, userScore) / (
-            np.linalg.norm(listofPoI, axis=1) * np.linalg.norm(userScore)
-        )
-        return cos_sim
+        # all scores are save
+        # categorize: food, bar, (cafe, tourism)
+
+    def recommend(self, poi, userScore):
+        # list, numpy, series 2개의 vector가 주어지면 요거기반으로 cosim을 구하는 function
+
+        # category = ['액티비티', '식당', '카페', '술집', '자연', '전시', '감성']
+
+        # fitness_dict에 PoI과 다른 PoI 간의 유사도를 평가한 결과를 담게 됩니다.
+        poiScore = self.dfScore.iloc[poi, 1:]
+
+        result = []
+        for poidx in poi:
+            poiScore = self.dfScore.iloc[poidx, 1:]
+            main_n = np.linalg.norm(userScore)
+            user_n = np.linalg.norm(poiScore)
+            prod = np.dot(userScore, poiScore)
+            result.append(prod / (main_n * user_n))
+
+        # user와 PoI 둘 다 평점을 매긴 카테고리에 대한 벡터로 코사인 유사도를 구한다.
+
+        return result
 
 
 class DB:
-    def __init__(self, coorPath, scorePath, xl=4, yl=2):
+    def __init__(self, coorPath, scorePath, xl=0.2, yl=0.1):
+
         self.dfCoor = pd.read_csv(coorPath)
         self.rS = Recommend(scorePath)
         self.xlimit = xl
         self.ylimit = yl
 
-    def get(self, key, obj):
-        return self.pd[key][obj]
-
     def getCoor(self, key):
-        return self.dfCoor[key]["x"], self.dfCoor[key]["y"]
 
-    def squareVisitAlg(self, src, dst, mvp=False):
+        return float(self.dfCoor.iloc[key, 2]), float(self.dfCoor.iloc[key, 3])
+
+    def squareVisitAlg(
+        self,
+        src,
+        dst,
+        userScore,
+        mvp=False,
+    ):
 
         results = []
         a, b = getLineInfo(src, dst)
         listOfPoI = self.getSquarebyTwo(src, dst)
-        scorewithoutP = self.rS.recommend(listOfPoI)
+        scorewithoutP = self.rS.recommend(listOfPoI, userScore)
 
-        penalties = self.getPenalty(listOfPoI, a, b)
+        penalties = self.getPenaltywithLine(listOfPoI, a, b)
+
+        scorewithoutP = np.array(scorewithoutP)
+        penalties = np.array(penalties)
+        penalties = penalties * penalties
 
         scores = scorewithoutP / penalties
 
@@ -63,60 +118,73 @@ class DB:
             spot = np.argmax(scores)
             results.append(spot)
         else:
+
             results.append(mvp)
 
-        return self.idxToNum(results)
+        return self.getResult(results, src, dst)
 
-    def expandedSquareVisitAlg(self, src, mvp):
+    def expandedSquareVisitAlg(self, src, mvp, userScore):
 
         results = []
         mvpCoor = self.getCoor(mvp)
 
         listOfPoI = self.getSquarebyTwo(src, mvpCoor)
-        scores = self.rS.recommend(listOfPoI)
+        scores = self.rS.recommend(listOfPoI, userScore)
+        penalties = self.getPenaltywithDot(listOfPoI, src)
+
+        scores = np.array(scores)
+        penalties = np.array(penalties)
+
+        scores = scores / (1 + np.exp(-1 * penalties))
 
         for _ in range(2):
             spot = np.argmax(scores)
-            results.append(spot)
+            results.append(listOfPoI[spot])
             scores[spot] = -1
 
         results.append(mvp)
 
-        return self.idxToNum(results)
+        return self.getResult(results, src, src)
 
-    def greedyVisitAlg(self, src):
+    def greedyVisitAlg(self, src, userScore):
         results = []
         temp_src = src
 
         for _ in range(3):
-            listOfPoI = self.getSquarebyOne(temp_src)
-            scores = self.rS.recommend(listOfPoI)
+            xl = self.xlimit
+            yl = self.ylimit
+            listOfPoI = []
+
+            while len(listOfPoI) == 0:
+                listOfPoI = self.getSquarebyOne(temp_src, xl, yl)
+                xl += 0.1
+                yl += 0.1
+            scores = self.rS.recommend(listOfPoI, userScore)
             spot = np.argmax(scores)
-            temp_src = spot
+            temp_src = self.getCoor(spot)
             results.append(spot)
 
-        return self.idxToNum(results)
+        return self.getResult(results, src, src)
 
-    def getSquarebyOne(self, place):
-        x, y = self.getCoor(place)
+    def getSquarebyOne(self, place, xl, yl):
+        x = place[0]
+        y = place[1]
 
-        xmin = x - self.xlimit
-        xmax = x + self.xlimit
-        ymin = y - self.ylimit
-        ymax = y + self.ylimit
+        xmin = x - xl
+        xmax = x + xl
+        ymin = y - yl
+        ymax = y + yl
 
         condition = "(x > @xmin) and (x < @xmax) and (y > @ymin) and (y < @ymax)"
 
-        result = self.df.query(condition)
-        return result["id"].to_numpy()
+        result = self.dfCoor.query(condition)
+        return result.index.to_numpy()
 
     def getSquarebyTwo(self, src, dst):
-        x1, y1 = self.getCoor(src)
-        if type(dst) == int:
-            x2, y2 = self.getCoor(dst)
-        else:
-            x2 = dst[0]
-            y2 = dst[1]
+        x1 = src[0]
+        y1 = src[1]
+        x2 = dst[0]
+        y2 = dst[1]
 
         xmin = min(x1, x2)
         xmax = max(x1, x2)
@@ -125,60 +193,94 @@ class DB:
 
         condition = "(x > @xmin) and (x < @xmax) and (y > @ymin) and (y < @ymax)"
 
-        result = self.df.query(condition)
-        return result["id"].to_numpy()
+        result = self.dfCoor.query(condition)
 
-    def getScore(self, userScore, listofPoI):
-        return self.rS.recommend(userScore, listofPoI)
+        return result.index.to_numpy()
 
-    def getPenalty(self, listofPoI, a, b):
+    def getPenaltywithDot(self, poIs, target):
 
-        penalties = {}
+        penalties = []
+        for poI in poIs:
+            coor = self.getCoor(poI)
+            penalties.append(getL2Distance(coor, target))
 
+        return penalties
+
+    def getPenaltywithLine(self, listofPoI, a, b):
+
+        penalties = []
         for poI in listofPoI:
-            targetCoor = self.getCoor(poI)
-            penalties[poI] = getLineInfo(targetCoor, a, b)
+            x, y = self.getCoor(poI)
+            penalties.append(getLineDistance(x, y, a, b))
 
         return penalties
 
     def getResult(self, lst, src, dst):
 
         results = []
-        results.append(src)
 
         coors = [self.getCoor(i) for i in lst]
-        srcCoor = self.getCoor(src)
-        dstCoor = self.getCoor(dst)
+        names = [self.dfCoor.iloc[i, 1] for i in lst]
+        adds = [list(self.dfCoor.iloc[i]) for i in lst]
+        distfromSrc = np.array([getL2Distance(i, src) for i in coors])
+        results.append(names[np.argmin(distfromSrc)])
 
-        distfromSrc = np.array([getL2Distance(i, srcCoor) for i in coors])
-        results.append(coors[np.argmin(distfromSrc)])
         del coors[np.argmin(distfromSrc)]
+        del names[np.argmin(distfromSrc)]
 
-        distfromDst = np.array([getL2Distance(i, dstCoor) for i in coors])
-        results.append(coors[np.argmax(distfromDst)])
-        results.append(coors[np.argmin(distfromDst)])
-        results.append(dst)
+        distfromDst = np.array([getL2Distance(i, dst) for i in coors])
+        results.append(names[np.argmax(distfromDst)])
+        results.append(names[np.argmin(distfromDst)])
 
         return results
 
 
-def getCourse(input):
+def getCourse(input, db):
 
-    #db = DB("data.csv") 안지훈이 테스트 하려고 일단 주석처리함. 대규 나중에 풀어줘.
-    print(input)
-    dst, src, mvp = 1, 2, 3
-
-    # if dst == src:
-    #     if len(mvp) == 0:
-    #         result = db.greedyVisitAlg(src)
-    #     else:
-    #         result = db.expandedSquareVisitAlg(src, mvp)
-    # else:
-    #     if len(mvp) == 0:
-    #         result = db.squareVisitAlg(src, dst)
-    #     else:
-    #         result = db.squareVisitAlg(src, dst, mvp)
-
-    result = {"courses": [(1, 1), (0, 2), (3, 4),(5, 6), (3, 1)]}
+    dst, src, mvp, userScore = input
+    if dst == src:
+        if mvp == 380:
+            result = db.greedyVisitAlg(src, userScore)
+        else:
+            result = db.expandedSquareVisitAlg(src, mvp, userScore)
+    else:
+        if mvp == 380:
+            result = db.squareVisitAlg(src, dst, userScore)
+        else:
+            result = db.squareVisitAlg(src, dst, userScore, mvp)
 
     return result
+
+
+def getRestaruant(input, db):
+
+    dst, src, userScore = input
+
+    userScore = userScore[:-1]
+    if dst == src:
+        result = db.greedyVisitAlg(src, userScore)
+    else:
+        result = db.squareVisitAlg(src, dst, userScore)
+
+    return result
+
+
+def getBar(input, db):
+
+    dst, userScore = input
+
+    userScore = userScore[:-1]
+
+    result = db.greedyVisitAlg(dst, userScore)
+
+    return result
+
+
+def main(inputs, dbs):
+
+    iC, iR, iB = decomposeInput(inputs)
+    courses = getCourse(iC, dbs[0])
+    restaurants = getRestaruant(iR, dbs[1])
+    bars = getBar(iB, dbs[2])
+
+    return courses, restaurants, bars

@@ -5,8 +5,7 @@ import com.travelrecommendation.travel.dto.UserTypeResultRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -37,6 +36,7 @@ public class TypeResultController {
 
 //        log.info("test result bean activated2");
 
+
         double maximum=-100000;
         String biggest="";
         Set<String> keySet=scores.keySet();
@@ -50,19 +50,28 @@ public class TypeResultController {
 
         Integer biggestType=-1;
         if (biggest.equals("activity")){
-            biggestType=1;
+            if(scores.get("cafe")>scores.get("photo") && scores.get("cafe")>scores.get("nature")){
+                biggestType=5;
+            }
+            if(scores.get("nature")>scores.get("photo") && scores.get("nature")>scores.get("cafe")){
+                biggestType=3;
+            }
+            else{
+                biggestType=1;
+            }
+
         }
         else if (biggest.equals("inside")){
-            biggestType=2;
+            biggestType=7;
         }
         else if (biggest.equals("nature")){
-            biggestType=3;
+            biggestType=6;
         }
         else if (biggest.equals("photo")){
             biggestType=4;
         }
         else if (biggest.equals("cafe")){
-            biggestType=5;
+            biggestType=2;
         }
 
 
