@@ -54,6 +54,7 @@ public class ModelRequest {
 
             if (response.getStatusLine().getStatusCode() == 200) {
                 String result = EntityUtils.toString(response.getEntity());
+                System.out.println(result);
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject=(JsonObject)parser.parse(result);
 
