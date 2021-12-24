@@ -59,6 +59,8 @@ public class ModelRequest {
 
                 UserFinalResponse answer = new UserFinalResponse();
                 answer.setType(Integer.getInteger(jsonObject.get("type").toString()));
+                System.out.println(jsonObject.get("type").toString());
+                System.out.println(Integer.getInteger(jsonObject.get("type").toString()));
                 System.out.println(answer.getType());
 
                 ArrayList<String> places = new ArrayList<>();
