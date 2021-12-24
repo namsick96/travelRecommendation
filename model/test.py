@@ -5,16 +5,15 @@ import json
 app = Flask(__name__)
 
 dbs = [
-    model.DB("tourism.csv", "score.csv"),
-    model.DB("restaurant.csv", "score.csv"),
-    model.DB("bar.csv", "score.csv"),
+    model.DB("t_coor.csv", "t_score.csv"),
+    model.DB("f_coor.csv", "f_score.csv"),
+    model.DB("b_coor.csv", "b_score.csv"),
 ]
 
 
 @app.route("/", methods=["POST"])
 def index():
     content = request.json
-
     result_dict = model.main(content, dbs)
     result = {
         "type": content["type"],
@@ -24,11 +23,12 @@ def index():
         "restaurant1": result_dict[1][0],
         "restaurant2": result_dict[1][1],
         "restaurant3": result_dict[1][2],
-        "alcohol1": result_dict[2][0],
-        "alcohol2": result_dict[2][1],
-        "alcohol3": result_dict[2][2],
+        "alchol1": result_dict[2][0],
+        "alchol2": result_dict[2][1],
+        "alchol3": result_dict[2][2],
     }
 
+    print(result)
     return json.dumps(result)
 
 
