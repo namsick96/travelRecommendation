@@ -65,7 +65,7 @@ function GetType() {
             // dispatch({ type: "POST_ANSWER" });
           }}
         >
-          <Link to="/testresult">제출하기</Link>
+          <Link to="/testresult" style={{ textDecoration: 'none' , color: 'white'}}>제출하기</Link>
         </button>
       ) : null}
     </>
