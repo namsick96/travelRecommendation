@@ -65,11 +65,13 @@ function Loading() {
 }
 
 function Result(props) {
+  console.log("props");
+  console.log(props.data);
   return (
     <div className="">
       <img src={`..imgs/${props.data.id}.jpg`}></img>
       <h1>{props.data.title}</h1>
-      <h4>{props.data.hastag}</h4>
+      <h4>{props.data.hashtag}</h4>
       <p>{props.data.description}</p>
       <button>
         <Link 
