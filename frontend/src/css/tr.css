@@ -62,3 +62,55 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
+  .type{
+
+    position: absolute;
+    left: 3vw;
+    top: 10vh;
+
+  }
+
+  .name{
+    display: inline-block;
+    border: 2px solid #F4A644;
+    border-radius: 8px;
+    color: white;
+    background-color: #F4A644;
+    position: absolute;
+    left: 7vw;
+    top: 15vh;
+  }
+
+  .hashtaging{
+      position: absolute;
+      left: 11vw;
+      top: 24vh;
+  }
+
+  .des{
+      position: absolute;
+      top: 30vh;
+      left: 2vw;
+      right: 2vw;
+      font-size: 14px;
+      letter-spacing: 1.3px;
+      line-height: 140%;
+  }
+  .button10{
+    position: absolute;
+    top: 52vh;
+    left: 9.1vw;
+    height: 52px;
+    width: 12vw;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #007A0A;
+    color: white;
+    border: 2px solid #007A0A;
+  }
+
+  .button10:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

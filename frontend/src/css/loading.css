@@ -50,9 +50,11 @@
     border-radius: 8px;
     position: relative;
     left: -7vw;
-    top: 29vh;
+    top: 34vh;
     margin-left: 30vh;
+    font-weight: bold;
 }
+
 
 .sp{
     padding: 1vh;
@@ -60,7 +62,8 @@
     border: solid #007A0A;
     position: absolute;
     left: 10vw;
-    top:39vh;
+    top:41vh;
+    font-weight: bold;
 
 }
 
@@ -70,12 +73,13 @@
     border: solid #007A0A;
     position: absolute;
     right: 10vw;
-    top:39vh;
+    top:41vh;
+    font-weight: bold;
 }
 
 .vector{
     position: absolute;
-    top: 35vh;
+    top: 37vh;
     left: 10vw;
     width: 80vw;
     border-top:6px;
@@ -87,7 +91,7 @@
     position: absolute;
     width: 4vw;
     left: 10vw;
-    top: 27vh;
+    top: 29vh;
 }
 
 .marker2{
@@ -101,21 +105,51 @@
     position: absolute;
     right: 10vw;
     width: 4vw;
-    top: 27vh;   
+    top: 29vh;   
 }
 
 .restaurant{
     border : solid  #007A0A;
     border-radius: 8px;
     padding: 1vh;
-    position: relative;
-    top:40vh;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .alchol{
     border : solid  #007A0A;
     border-radius: 8px;
     padding: 1vh;
+    margin-bottom: 10px;
+    font-weight: bold;
  
+}
+
+.title10{
+    position: absolute;
+    font-size: 65px;
+    color : #007A0A;
+    font-weight: bold;
+    top: 15vh;
+    left:32vw;
+
+}
+
+.ji{
+    font-size: 30px;
+    color: black;
+}
+
+.rescont{
+    display: inline-block;
+    position: absolute;
+    top: 60vh;
+    left: 20vw;
+}
+
+.alcholcont{
+    display: inline-block;
+    position: absolute;
+    top: 60vh;
+    right: 20vw;
 }

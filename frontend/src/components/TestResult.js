@@ -69,11 +69,12 @@ function Result(props) {
   console.log(props);
   return (
     <div className="">
-      <h1>{props.data.title}</h1>
-      <h4>{props.data.hashtag}</h4>
-      <p>{props.data.description}</p>
-      <button>
-        <Link 
+      <h2 className="type" style={{fontFamily: 'EliceDigitalBaeum_Bold'}}> 당신의 유형은</h2> 
+      <h1 className="name" style={{ fontFamily: 'paybooc-Bold'}}>{props.data.title}</h1>
+      <h4 className="hashtaging" style={{ fontFamily: 'paybooc-Bold'}}>{props.data.hashtag}</h4>
+      <p className="des" style={{ fontFamily: 'paybooc-Bold'}}>{props.data.description}</p>
+      <button className="button10">
+        <Link  style={{ textDecoration: 'none' , color: 'white', fontFamily: 'Cafe24SsurroundAir'}}
           onClick={() => {
             props.dispatch({
               type: "ADD_USER_INFO",

@@ -57,32 +57,39 @@ function ResultComponent(props) {
   
   return (
     <div>
-      <div>여기올레?  <span>가 추천하는 여행 코스</span></div>
+      <div  className="title10" style={{fontFamily : 'WandohopeR'}}>여기올레?  
+      <span className="ji" style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>가 추천하는 여행 코스</span></div>
       <img className="marker1" src={marker}></img><img className="marker3"  src={marker}></img>
       <hr className="vector"></hr>
-      <div>  <span className="sp">출발지</span>
+      <div>  <span className="sp"  style={{fontFamily: 'Cafe24SsurroundAir'}}>출발지</span>
       {
         places.map((place,i)=> {
-          return <span className="course" key={i}><img className="marker2"  src={marker}></img> {place}</span>
+          return <span style={{fontFamily: 'Cafe24SsurroundAir'}} className="course" key={i}><img className="marker2"  src={marker}></img> {place}</span>
         })
       }
-      <span className="dt">도착지</span>
+      <span className="dt" style={{fontFamily: 'Cafe24SsurroundAir'}}>도착지</span>
       </div>
+      <div className="rescont">
+      <h3 style={{fontFamily: 'EliceDigitalBaeum_Bold'}}>-식당 추천-</h3>
       <div >
       {
         restaurant.map((place, i)=> {
-          return <span key={i} className="restaurant">{place}</span>
+          return <div key={i} className="restaurant" style={{fontFamily: 'Cafe24SsurroundAir'}} >{place}</div>
         })
       }
       </div>
+      </div>
+      <div className="alcholcont">
+      <h3 style={{fontFamily: 'EliceDigitalBaeum_Bold'}} >-술집 추천-</h3>
       <div>
       {      
         alchol.map((place, i)=> {
-          return <span key={i}  className="alchol">{place}</span>
+          return <div key={i} style={{fontFamily: 'Cafe24SsurroundAir'}}  className="alchol">{place}</div>
         })
       }
       </div>
       
+      </div>
     </div>
   );
 }
