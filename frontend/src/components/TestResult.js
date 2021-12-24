@@ -66,7 +66,7 @@ function Loading() {
 
 function Result(props) {
   return (
-    <div>
+    <div className="">
       <h1>{props.data.title}</h1>
       <p>{props.data.description}</p>
       <button>
