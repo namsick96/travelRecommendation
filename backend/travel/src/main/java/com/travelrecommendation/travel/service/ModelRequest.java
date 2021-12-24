@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.travelrecommendation.travel.dto.UserFinalRequest;
+import com.travelrecommendation.travel.dto.UserFinalResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -21,12 +23,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ModelRequest {
-    public UserFinalRequest startModel(UserFinalRequest request) throws IOException, InterruptedException {
+    public UserFinalResponse startModel(UserFinalRequest request) throws IOException, InterruptedException {
 
 //        String command ="pwd";//"python3 /Users/jihoonan/Desktop/travelRecommendation/backend/test.py";
 //        위에 command는 예시임.
@@ -52,13 +56,33 @@ public class ModelRequest {
                 String result = EntityUtils.toString(response.getEntity());
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject=(JsonObject)parser.parse(result);
-                // json Object 파싱하기
-                // code should be added on here
 
-                //test용 더미 state return
-                // 나중에 모델 서버에서 받은 값으로 바꾸기.
-                UserFinalRequest answer = new UserFinalRequest();
-                answer.setType("muk");
+                UserFinalResponse answer = new UserFinalResponse();
+                answer.setType(Integer.getInteger(jsonObject.get("type").getAsString()));
+
+                ArrayList<String> places = new ArrayList<>();
+                places.add(jsonObject.get("first").getAsString());
+                places.add(jsonObject.get("second").getAsString());
+                places.add(jsonObject.get("third").getAsString());
+
+                ArrayList<String> alchol = new ArrayList<>();
+                alchol.add(jsonObject.get("alchol1").getAsString());
+                alchol.add(jsonObject.get("alchol2").getAsString());
+                alchol.add(jsonObject.get("alchol3").getAsString());
+
+                ArrayList<String> restaurant = new ArrayList<>();
+                restaurant.add(jsonObject.get("restaurant1").getAsString());
+                restaurant.add(jsonObject.get("restaurant2").getAsString());
+                restaurant.add(jsonObject.get("restaurant3").getAsString());
+
+                HashMap<String,List<String>> token = new HashMap<>();
+                token.put("places",places);
+                token.put("alchol",alchol);
+                token.put("restaurant",restaurant);
+
+                answer.setResult(token);
+
+
                 return answer;
 
             } else {
@@ -90,8 +114,8 @@ public class ModelRequest {
 //        }
 //
 //        return tokens;
-        UserFinalRequest answer2 = new UserFinalRequest();
-        answer2.setType("error");
+        UserFinalResponse answer2 = new UserFinalResponse();
+        answer2.setType(1);
         return answer2;
     }
 }
