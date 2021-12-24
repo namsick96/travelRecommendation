@@ -12,7 +12,7 @@ function GetType() {
   let found = Questions.find((x) => x.id == id);
   let history = useHistory();
   let dispatch = useDispatch();
-  let [answer, setAnswer] = useState(0);
+  let [answer, setAnswer] = useState(-1);
 
   return (
     <>
@@ -29,7 +29,7 @@ function GetType() {
                 onClick={() => {
                   setAnswer(i);
                 }}
-                
+                style={i===answer ? { background:'#F4A644'} : null}
               >
                 {a}
               </button>
@@ -48,7 +48,7 @@ function GetType() {
         </button>
       ) : null}
 
-      {id != 12 ? (
+      {id != 10 ? (
         <button className="next button3"
           onClick={() => {
             // 문항별 응답 store에 저장
@@ -58,7 +58,7 @@ function GetType() {
           <Link to={`/test/${parseInt(id) + 1}`} style={{ textDecoration: 'none' , color: 'white', fontFamily: 'Cafe24SsurroundAir'}}>다음으로</Link>
         </button>
       ) : null}
-      {id == 12 ? (
+      {id == 10 ? (
         <button className="next button3"
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송

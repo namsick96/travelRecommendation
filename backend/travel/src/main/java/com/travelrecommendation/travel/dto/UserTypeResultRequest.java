@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 public class UserTypeResultRequest {
 
-    private List<HashMap<String,Integer>> answer;
+    private List<HashMap<String,Double>> answer;
 
 }
