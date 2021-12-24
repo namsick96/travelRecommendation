@@ -37,7 +37,11 @@ function TypeResult() {
         </button>
       ) : null}
       {showResult === true ? (
-        <Result data={typeInfo[state.typeResult.result.type]}></Result>
+        <Result
+          data={typeInfo[state.typeResult.result.type]}
+          dispatch={dispatch}
+          state={state}
+        ></Result>
       ) : null}
     </>
   );
@@ -52,16 +56,19 @@ function Result(props) {
     <div>
       <h1>{props.data.title}</h1>
       <p>{props.data.description}</p>
-      <button
-        onClick={() => {
-          dispatch({
-            type: "ADD_USER_INFO",
-            testType: state.typeResult.result.type,
-            scores: state.typeResult.result.scores,
-          });
-        }}
-      >
-        <Link to="/src">여행코스 추천받기</Link>
+      <button>
+        <Link
+          onClick={() => {
+            props.dispatch({
+              type: "ADD_USER_INFO",
+              testType: props.state.typeResult.result.type,
+              scores: props.state.typeResult.result.scores,
+            });
+          }}
+          to="/src"
+        >
+          여행코스 추천받기
+        </Link>
       </button>
     </div>
   );

@@ -1,58 +1,62 @@
-.homecont{
-    height: 100vh;
-    background-color: #F4A644;
-    margin: 0px;
+.homecont {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f4a644;
+  margin: 0px;
 }
 
-.titlecont{
-    position: absolute;
-    left: 34vw;
-    top: 12vh;
-    width: 70vh;
-    height: 70vh;
-    border-radius: 50%;
-    background-color: white;
-
+.titlecont {
+  display: flex;
+  flex-direction: column;
+  /* position: absolute;
+  left: 34vw;
+  top: 12vh; */
+  width: 70vh;
+  height: 70vh;
+  border-radius: 50%;
+  background-color: white;
 }
-.airplane{
-    position: absolute;
-    left: 9vh;
-    top: 16.3vh;
-    width: 80px;
-    height: 80px;
-    transform : rotate(17deg);
-}
-
-.jejutitle{
-    position: absolute;
-    top: 24vh;
-    left: 13vh;
-    font-size: 80px;
-    margin: 0px;
-    color: #007A0A;
+.airplane {
+  position: absolute;
+  left: 9vh;
+  top: 16.3vh;
+  width: 80px;
+  height: 80px;
+  transform: rotate(17deg);
 }
 
-.service{
-    position: absolute;
-    color: #F4A644;
-    top: 38vh;
-    left: 17vh;
+.jejutitle {
+  position: absolute;
+  top: 24vh;
+  left: 13vh;
+  font-size: 80px;
+  margin: 0px;
+  color: #007a0a;
 }
 
-.tr{
-    position: absolute;
-    top: 48vh;
-    left: 18vh;
-    height: 52px;
-    border-radius: 8px;
-    font-weight: bold;
-    background-color: #007A0A;
-    color: white;
-    border: 2px solid #007A0A;
+.service {
+  position: absolute;
+  color: #f4a644;
+  top: 38vh;
+  left: 17vh;
 }
-.jeju{
-    width: 80px;
-    position: absolute;
-    top: 87vh;
-    left: 48vw;
+
+.tr {
+  position: absolute;
+  top: 48vh;
+  left: 18vh;
+  height: 52px;
+  border-radius: 8px;
+  font-weight: bold;
+  background-color: #007a0a;
+  color: white;
+  border: 2px solid #007a0a;
+}
+.jeju {
+  width: 80px;
+  position: absolute;
+  top: 87vh;
+  left: 48vw;
 }
