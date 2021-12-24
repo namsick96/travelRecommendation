@@ -67,6 +67,7 @@ function Loading() {
 function Result(props) {
   return (
     <div className="">
+      <img src={`..imgs/${props.data.id}.jpg`}></img>
       <h1>{props.data.title}</h1>
       <p>{props.data.description}</p>
       <button>
@@ -79,7 +80,7 @@ function Result(props) {
             });
           }}
           to="/src"
-        >
+        >``
           여행코스 추천받기
         </Link>
       </button>
