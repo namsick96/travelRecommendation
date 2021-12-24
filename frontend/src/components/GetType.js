@@ -48,7 +48,7 @@ function GetType() {
         </button>
       ) : null}
 
-      {id != 12 ? (
+      {id != 10 ? (
         <button className="next button3"
           onClick={() => {
             // 문항별 응답 store에 저장
@@ -58,7 +58,7 @@ function GetType() {
           <Link to={`/test/${parseInt(id) + 1}`} style={{ textDecoration: 'none' , color: 'white'}}>다음으로</Link>
         </button>
       ) : null}
-      {id == 12 ? (
+      {id == 10 ? (
         <button className="next button3"
           onClick={() => {
             // 12번 응답 저장 후 백엔드 서버에 최종 응답 전송
