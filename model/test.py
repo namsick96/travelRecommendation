@@ -23,9 +23,9 @@ def index():
         "restaurant1": result_dict[1][0],
         "restaurant2": result_dict[1][1],
         "restaurant3": result_dict[1][2],
-        "alcohol1": result_dict[2][0],
-        "alcohol2": result_dict[2][1],
-        "alcohol3": result_dict[2][2],
+        "alchol1": result_dict[2][0],
+        "alchol2": result_dict[2][1],
+        "alchol3": result_dict[2][2],
     }
 
     print(result)
