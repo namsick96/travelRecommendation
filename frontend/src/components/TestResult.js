@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTypeResult } from "../reducers/typeResult";
 import typeInfo from "../data/typeInfo";
 import { Link } from "react-router-dom";
+import "../css/tr.css";
+import jeju from "../css/jeju.png";
+import font from "../font/font.css";
 
 function TypeResult() {
   let [loading, setLoading] = useState(true);
@@ -23,17 +26,20 @@ function TypeResult() {
 
   return (
     <>
+       <h4 className="bar1" style={{fontFamily : 'WandohopeR'}}>여기 올레</h4>
+       <div className="testcont">
+      <div className="cont">
       {/* 요청 성공하면 결과를 화면에 보여주는 코드 */}
       {loading === true ? <Loading></Loading> : null}
       {showButton === true ? (
-        <button
+        <button className="button7"
           onClick={() => {
             setLoading(false);
             setShowButton(false);
             setShowResult(true);
           }}
         >
-          결과 보기
+          나의 여행 유형 확인하기
         </button>
       ) : null}
       {showResult === true ? (
@@ -43,12 +49,19 @@ function TypeResult() {
           state={state}
         ></Result>
       ) : null}
+      </div></div>
     </>
   );
 }
 
 function Loading() {
-  return <div>로딩 중</div>;
+  return (
+  <div>
+  <h1 className="hashtag">#</h1>
+  <div className="loading">테스트 결과 로딩 중</div>
+  <img className="jihoon" src={jeju}></img>
+  </div>
+  )
 }
 
 function Result(props) {
@@ -71,6 +84,7 @@ function Result(props) {
         </Link>
       </button>
     </div>
+
   );
 }
 export default TypeResult;

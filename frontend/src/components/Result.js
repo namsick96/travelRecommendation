@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getResult } from "../reducers/place";
+import font from "../font/font.css";
 
 function Result() {
   let [loading, setLoading] = useState(true);

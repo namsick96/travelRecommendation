@@ -10,9 +10,9 @@
 .titlecont {
   display: flex;
   flex-direction: column;
-  /* position: absolute;
+  position: absolute;
   left: 34vw;
-  top: 12vh; */
+  top: 12vh; 
   width: 70vh;
   height: 70vh;
   border-radius: 50%;
@@ -27,36 +27,41 @@
   transform: rotate(17deg);
 }
 
-.jejutitle {
-  position: absolute;
-  top: 24vh;
-  left: 13vh;
-  font-size: 80px;
-  margin: 0px;
-  color: #007a0a;
+.jejutitle{
+    font-family: 'WandohopeR';
+    position: absolute;
+    top: 24vh;
+    left: 11.3vh;
+    text-align: center;
+    font-size: 100px;
+    margin: 0px;
+    color: #007A0A;
 }
 
-.service {
-  position: absolute;
-  color: #f4a644;
-  top: 38vh;
-  left: 17vh;
+.service{
+    font-family: 'EliceDigitalBaeum_Bold';
+    position: absolute;
+    color: #F4A644;
+    top: 39vh;
+    left: 17.4vh;
 }
 
-.tr {
-  position: absolute;
-  top: 48vh;
-  left: 18vh;
-  height: 52px;
-  border-radius: 8px;
-  font-weight: bold;
-  background-color: #007a0a;
-  color: white;
-  border: 2px solid #007a0a;
+.tr{
+    position: absolute;
+    top: 48vh;
+    left: 17vh;
+    height: 52px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #007A0A;
+    color: white;
+    border: 2px solid #007A0A;
 }
-.jeju {
-  width: 80px;
+
+.jeju{
   position: absolute;
-  top: 87vh;
-  left: 48vw;
+  height : 14vh;
+  top :86vh;
+  left: 47vw;
+
 }
