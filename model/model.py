@@ -170,17 +170,25 @@ class DB:
         return self.getResult(results, src, src)
 
     def getSquarebyOne(self, place, xl, yl):
-        x = place[0]
-        y = place[1]
 
-        xmin = x - xl
-        xmax = x + xl
-        ymin = y - yl
-        ymax = y + yl
+        result_lst = []
+        while len(result_lst) <= 3:
+            x = place[0]
+            y = place[1]
 
-        condition = "(x > @xmin) and (x < @xmax) and (y > @ymin) and (y < @ymax)"
+            xmin = x - xl
+            xmax = x + xl
+            ymin = y - yl
+            ymax = y + yl
 
-        result = self.dfCoor.query(condition)
+            condition = "(x > @xmin) and (x < @xmax) and (y > @ymin) and (y < @ymax)"
+
+            result = self.dfCoor.query(condition)
+
+            result_lst = result.index.tolist()
+
+            xl += 0.05
+            yl += 0.1
         return result.index.to_numpy()
 
     def getSquarebyTwo(self, src, dst):
