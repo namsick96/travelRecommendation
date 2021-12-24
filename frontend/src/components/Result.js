@@ -24,7 +24,7 @@ function Result() {
       <p>최종 결과 페이지</p>
       {loading === true ? <Loading></Loading> : null}
       {showResult === true ? (
-        <ResultComponent data={state.result}></ResultComponent>
+        <ResultComponent data={state.result.result}></ResultComponent>
       ) : null}
     </>
   );
