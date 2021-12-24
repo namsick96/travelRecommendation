@@ -204,7 +204,7 @@ class DB:
             scores[spot] = -1
             result.append(listOfPoI[spot])
 
-        return self.getResult(results, src, src)
+        return self.getResult(result, src, src)
 
     def getSquarebyOne(self, place, xl, yl):
 
