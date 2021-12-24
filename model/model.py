@@ -186,11 +186,12 @@ class DB:
             yl += 0.1
         scores = self.rS.recommend(listOfPoI, userScore)
         result = []
+        print(scores)
         for _ in range(3):
             spot = np.argmax(scores)
             scores[spot] = -1
             result.append(listOfPoI[spot])
-
+        print(result)
         return self.getResult(results, src, src)
 
     def getSquarebyOne(self, place, xl, yl):
