@@ -13,6 +13,7 @@ def decomposeInput(input):
     lst_mvp = input["mvp"]
     userScore = input["scores"]
     lst_userScore = list(userScore.values())
+    lst_userScore = [i / 10 for i in lst_userScore]
     src = input["starting"]
     lst_src = list(src.values())
 
@@ -109,6 +110,7 @@ class DB:
 
         scores = scorewithoutP / penalties
 
+        print(scores)
         for _ in range(2):
             spot = np.argmax(scores)
             results.append(spot)
