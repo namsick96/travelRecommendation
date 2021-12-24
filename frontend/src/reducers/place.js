@@ -68,6 +68,7 @@ function place(state = initialState, action) {
       };
     case "GET_FINALRESULT_SUCCESS":
       console.log("succeed");
+      console.log({...state, result:action.result});
       return {
         ...state,
         result: action.result,
