@@ -165,7 +165,7 @@ class DB:
             scores[spot] = -1
             spot = np.argmax(scores)
             temp_src = self.getCoor(spot)
-            results.append(spot)
+            results.append(listOfPoI[spot])
 
         return self.getResult(results, src, src)
 
