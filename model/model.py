@@ -110,8 +110,6 @@ class DB:
 
         scores = scorewithoutP / penalties
 
-        print(scores)
-
         for _ in range(2):
             spot = np.argmax(scores)
             results.append(spot)
@@ -152,7 +150,7 @@ class DB:
     def greedyVisitAlg(self, src, userScore):
         results = []
         temp_src = src
-
+        temp = -1
         for _ in range(3):
             xl = self.xlimit
             yl = self.ylimit
@@ -164,23 +162,36 @@ class DB:
                 yl += 0.1
             scores = self.rS.recommend(listOfPoI, userScore)
             spot = np.argmax(scores)
+            if listOfPoI[spot] == temp:
+                scores[spot] = -1
+                spot = np.argmax(scores)
+            temp = listOfPoI[spot]
             temp_src = self.getCoor(spot)
-            results.append(spot)
+            results.append(listOfPoI[spot])
 
         return self.getResult(results, src, src)
 
     def getSquarebyOne(self, place, xl, yl):
-        x = place[0]
-        y = place[1]
 
-        xmin = x - xl
-        xmax = x + xl
-        ymin = y - yl
-        ymax = y + yl
+        result_lst = []
+        while len(result_lst) <= 3:
+            x = place[0]
+            y = place[1]
 
-        condition = "(x > @xmin) and (x < @xmax) and (y > @ymin) and (y < @ymax)"
+            xmin = x - xl
+            xmax = x + xl
+            ymin = y - yl
+            ymax = y + yl
 
-        result = self.dfCoor.query(condition)
+            condition = "(x > @xmin) and (x < @xmax) and (y > @ymin) and (y < @ymax)"
+
+            result = self.dfCoor.query(condition)
+
+            result_lst = result.index.tolist()
+
+            xl += 0.05
+            yl += 0.1
+        print(result.index.tolist())
         return result.index.to_numpy()
 
     def getSquarebyTwo(self, src, dst):
@@ -205,7 +216,7 @@ class DB:
             result = self.dfCoor.query(condition)
 
             result_lst = result.index.tolist()
-            print(result_lst)
+
             xl += 0.05
             yl += 0.1
 
@@ -252,7 +263,8 @@ class DB:
 def getCourse(input, db):
 
     dst, src, mvp, userScore = input
-    if dst == src:
+    print(getL2Distance(src, dst))
+    if getL2Distance(src, dst) <= 0.01:
         if mvp == 380:
             result = db.greedyVisitAlg(src, userScore)
         else:
@@ -271,7 +283,7 @@ def getRestaruant(input, db):
     dst, src, userScore = input
 
     userScore = userScore[:-1]
-    if dst == src:
+    if getL2Distance(src, dst) <= 0.01:
         result = db.greedyVisitAlg(src, userScore)
     else:
         result = db.squareVisitAlg(src, dst, userScore)
@@ -293,7 +305,6 @@ def getBar(input, db):
 def main(inputs, dbs):
 
     iC, iR, iB = decomposeInput(inputs)
-    print(iC, iR, iB)
     courses = getCourse(iC, dbs[0])
     restaurants = getRestaruant(iR, dbs[1])
     bars = getBar(iB, dbs[2])

@@ -69,6 +69,7 @@ function Result(props) {
     <div className="">
       <img src={`..imgs/${props.data.id}.jpg`}></img>
       <h1>{props.data.title}</h1>
+      <h4>{props.data.hastag}</h4>
       <p>{props.data.description}</p>
       <button>
         <Link 
