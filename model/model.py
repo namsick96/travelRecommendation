@@ -171,6 +171,28 @@ class DB:
 
         return self.getResult(results, src, src)
 
+    def greedyVisitAlg2(self, src, userScore):
+        results = []
+        temp_src = src
+        temp = -1
+
+        xl = self.xlimit
+        yl = self.ylimit
+        listOfPoI = []
+
+        while len(listOfPoI) == 0:
+            listOfPoI = self.getSquarebyOne(temp_src, xl, yl)
+            xl += 0.1
+            yl += 0.1
+        scores = self.rS.recommend(listOfPoI, userScore)
+        result = []
+        for _ in range(3):
+            spot = np.argmax(scores)
+            scores[spot] = -1
+            result.append(listOfPoI[spot])
+
+        return self.getResult(results, src, src)
+
     def getSquarebyOne(self, place, xl, yl):
 
         result_lst = []
@@ -297,8 +319,8 @@ def getBar(input, db):
 
     userScore = userScore[:-1]
 
-    result = db.greedyVisitAlg(dst, userScore)
-
+    result = db.greedyVisitAlg2(dst, userScore)
+    db.getCoor()
     return result
 
 
