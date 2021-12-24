@@ -112,14 +112,13 @@ class DB:
 
         for _ in range(2):
             spot = np.argmax(scores)
-            results.append(spot)
+            results.append(listOfPoI[spot])
             scores[spot] = -1
 
         if not mvp:
             spot = np.argmax(scores)
-            results.append(spot)
+            results.append(listOfPoI[spot])
         else:
-
             results.append(mvp)
 
         return self.getResult(results, src, dst)
@@ -136,7 +135,7 @@ class DB:
         scores = np.array(scores)
         penalties = np.array(penalties)
 
-        scores = scores / (1 + np.exp(-1 * penalties))
+        scores = scores / penalties
 
         for _ in range(2):
             spot = np.argmax(scores)
@@ -161,6 +160,12 @@ class DB:
                 xl += 0.1
                 yl += 0.1
             scores = self.rS.recommend(listOfPoI, userScore)
+            penalties = self.getPenaltywithDot(listOfPoI, src)
+
+            scores = np.array(scores)
+            penalties = np.array(penalties)
+
+            scores = scores / penalties
             spot = np.argmax(scores)
             if listOfPoI[spot] == temp:
                 scores[spot] = -1
@@ -170,6 +175,36 @@ class DB:
             results.append(listOfPoI[spot])
 
         return self.getResult(results, src, src)
+
+    def greedyVisitAlg2(self, src, userScore):
+        results = []
+        temp_src = src
+        temp = -1
+
+        xl = self.xlimit
+        yl = self.ylimit
+        listOfPoI = []
+
+        while len(listOfPoI) <= 3:
+            listOfPoI = self.getSquarebyOne(temp_src, xl, yl)
+            xl += 0.1
+            yl += 0.1
+        scores = self.rS.recommend(listOfPoI, userScore)
+        penalties = self.getPenaltywithDot(listOfPoI, src)
+
+        scores = np.array(scores)
+        penalties = np.array(penalties)
+
+        scores = scores / penalties
+
+        result = []
+
+        for _ in range(3):
+            spot = np.argmax(scores)
+            scores[spot] = -1
+            result.append(listOfPoI[spot])
+
+        return self.getResult(result, src, src)
 
     def getSquarebyOne(self, place, xl, yl):
 
@@ -191,7 +226,7 @@ class DB:
 
             xl += 0.05
             yl += 0.1
-        print(result.index.tolist())
+
         return result.index.to_numpy()
 
     def getSquarebyTwo(self, src, dst):
@@ -246,7 +281,7 @@ class DB:
 
         coors = [self.getCoor(i) for i in lst]
         names = [self.dfCoor.iloc[i, 1] for i in lst]
-        adds = [list(self.dfCoor.iloc[i]) for i in lst]
+        print(names)
         distfromSrc = np.array([getL2Distance(i, src) for i in coors])
         results.append(names[np.argmin(distfromSrc)])
 
@@ -297,7 +332,7 @@ def getBar(input, db):
 
     userScore = userScore[:-1]
 
-    result = db.greedyVisitAlg(dst, userScore)
+    result = db.greedyVisitAlg2(dst, userScore)
 
     return result
 
