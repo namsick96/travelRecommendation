@@ -43,20 +43,7 @@ class Recommend:
         # all scores are save
         # categorize: food, bar, (cafe, tourism)
 
-    #def recommend(self, sim_dict):
-        
-        #a= cosim(self, userScore, dfscore)
-        #가장 유사도가 높은 것 부터 딕셔너리로 출력
-    
-        # to-do 1
-        # 기본 로직 1. 현재 위치가 들어오면 그 위치를 기준으로 거리제한 = PoI
-        # 2. scroe 기반으로 정렬
-        # 3. return
-        # score = [0,1,,...]
-        # PoI = [3,11,28,35,...](거리 기준으로 추려낸 장소들의 key값이 쭈루룩)
-        # dfScore[3] = [0,1,1,...]
-
-    def cosim(self,userScore, dfscore):
+    def recommend(self,userScore):
         # list, numpy, series 2개의 vector가 주어지면 요거기반으로 cosim을 구하는 function
         
         # category = ['액티비티', '식당', '카페', '술집', '자연', '전시', '감성']
@@ -69,8 +56,8 @@ class Recommend:
             sm= [m for m in userScore.columns]
         
             main_n = np.linalg.norm(userScore.iloc[0,sm])
-            user_n = np.linalg.norm(dfscore.iloc[user,sm])
-            prod = np.dot(userScore.iloc[0,sm], dfscore.iloc[user,sm])
+            user_n = np.linalg.norm(self.dfScore.iloc[user,sm])
+            prod = np.dot(userScore.iloc[0,sm], self.dfScore.iloc[user,sm])
             fitness_dict[user]=prod/(main_n*user_n)
 
         fitness = sorted(fitness_dict.items() ,key=operator.itemgetter(1), reverse=True)
