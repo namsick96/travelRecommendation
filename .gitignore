@@ -1,7 +1,12 @@
 chromedriver
 <<<<<<< HEAD
+<<<<<<< HEAD
 node_modules
 .DS_Store
 =======
 .DS_Store
 >>>>>>> tR-4
+=======
+node_modules
+.DS_Store
+>>>>>>> bd71cefc6630d10c44370d9a0ee0a04cbbf0ea1e
