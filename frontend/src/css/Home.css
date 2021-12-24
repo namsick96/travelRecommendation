@@ -10,9 +10,9 @@
 .titlecont {
   display: flex;
   flex-direction: column;
-  /* position: absolute;
+  position: absolute;
   left: 34vw;
-  top: 12vh; */
+  top: 12vh; 
   width: 70vh;
   height: 70vh;
   border-radius: 50%;
@@ -56,4 +56,12 @@
     background-color: #007A0A;
     color: white;
     border: 2px solid #007A0A;
+}
+
+.jeju{
+  position: absolute;
+  height : 14vh;
+  top :86vh;
+  left: 47vw;
+
 }
