@@ -279,6 +279,7 @@ def getBar(input, db):
 def main(inputs, dbs):
 
     iC, iR, iB = decomposeInput(inputs)
+    print(iC, iR, iB)
     courses = getCourse(iC, dbs[0])
     restaurants = getRestaruant(iR, dbs[1])
     bars = getBar(iB, dbs[2])
