@@ -58,10 +58,10 @@ public class ModelRequest {
                 JsonObject jsonObject=(JsonObject)parser.parse(result);
 
                 UserFinalResponse answer = new UserFinalResponse();
-                answer.setType(Integer.getInteger(jsonObject.get("type").toString()));
-                System.out.println(jsonObject.get("type").toString());
-                System.out.println(Integer.parseInt(jsonObject.get("type").toString()));
-                System.out.println(answer.getType());
+                answer.setType(Integer.parseInt(jsonObject.get("type").toString()));
+//                System.out.println(jsonObject.get("type").toString());
+//                System.out.println(Integer.parseInt(jsonObject.get("type").toString()));
+//                System.out.println(answer.getType());
 
                 ArrayList<String> places = new ArrayList<>();
                 places.add(jsonObject.get("first").getAsString());
