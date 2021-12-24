@@ -136,7 +136,7 @@ class DB:
         scores = np.array(scores)
         penalties = np.array(penalties)
 
-        scores = scores / (1 + np.exp(-1 * penalties))
+        scores = scores / penalties
 
         for _ in range(2):
             spot = np.argmax(scores)
@@ -161,6 +161,12 @@ class DB:
                 xl += 0.1
                 yl += 0.1
             scores = self.rS.recommend(listOfPoI, userScore)
+            penalties = self.getPenaltywithDot(listOfPoI, src)
+
+            scores = np.array(scores)
+            penalties = np.array(penalties)
+
+            scores = scores / penalties
             spot = np.argmax(scores)
             if listOfPoI[spot] == temp:
                 scores[spot] = -1
@@ -185,6 +191,13 @@ class DB:
             xl += 0.1
             yl += 0.1
         scores = self.rS.recommend(listOfPoI, userScore)
+        penalties = self.getPenaltywithDot(listOfPoI, src)
+
+        scores = np.array(scores)
+        penalties = np.array(penalties)
+
+        scores = scores / penalties
+
         result = []
         print(scores)
         for _ in range(3):
