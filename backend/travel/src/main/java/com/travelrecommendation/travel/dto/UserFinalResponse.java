@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Getter
 @Setter
-public class TypeResult {
-
+public class UserFinalResponse {
     private Integer type;
-    private HashMap<String,Integer> scores;
+    private HashMap<String,List<String>> result;
 }

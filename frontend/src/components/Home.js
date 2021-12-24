@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Home.css";
@@ -8,7 +9,7 @@ import font from "../font/font.css";
 function Home() {
   return (
     <>
-      <div className="homecont"> 
+      <div className="homecont">
         <div className="titlecont">
         <img src={airplane} className="airplane"></img>
         <h1 className="jejutitle" >여기올레</h1>
