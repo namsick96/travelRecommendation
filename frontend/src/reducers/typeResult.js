@@ -11,6 +11,8 @@ export const getTypeResult = async (props) => {
 
   try {
     const data = JSON.stringify({ answer: props });
+    console.log("data");
+    console.log(data);
     const instance = axios.create({
       baseURL: "http://3.34.82.24:8080",
     });

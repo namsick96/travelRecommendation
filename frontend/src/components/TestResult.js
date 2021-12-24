@@ -44,8 +44,8 @@ function TypeResult() {
       ) : null}
       {showResult === true ? (
         <Result
-          data={typeInfo[state.typeResult.result.type]}
           dispatch={dispatch}
+          data={typeInfo[state.typeResult.result.type]}
           state={state}
         ></Result>
       ) : null}
@@ -66,10 +66,9 @@ function Loading() {
 
 function Result(props) {
   console.log("props");
-  console.log(props.data);
+  console.log(props);
   return (
     <div className="">
-      <img src={`..imgs/${props.data.id}.jpg`}></img>
       <h1>{props.data.title}</h1>
       <h4>{props.data.hashtag}</h4>
       <p>{props.data.description}</p>
@@ -83,7 +82,7 @@ function Result(props) {
             });
           }}
           to="/src"
-        >``
+        >
           여행코스 추천받기
         </Link>
       </button>
