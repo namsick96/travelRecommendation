@@ -150,7 +150,7 @@ class DB:
     def greedyVisitAlg(self, src, userScore):
         results = []
         temp_src = src
-
+        temp = -1
         for _ in range(3):
             xl = self.xlimit
             yl = self.ylimit
@@ -162,8 +162,10 @@ class DB:
                 yl += 0.1
             scores = self.rS.recommend(listOfPoI, userScore)
             spot = np.argmax(scores)
-            scores[spot] = -1
-            spot = np.argmax(scores)
+            if listOfPoI[spot] == temp:
+                scores[spot] = -1
+                spot = np.argmax(scores)
+            temp = listOfPoI[spot]
             temp_src = self.getCoor(spot)
             results.append(listOfPoI[spot])
 
