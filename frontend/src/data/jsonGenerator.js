@@ -11,7 +11,7 @@ function csvToJSON(csv_string) {
 
 const fs = require("fs");
 const file_csv = fs.readFileSync(
-  "/Users/eunddodi/Desktop/conference/travelRecommendation/frontend/src/data/name_place.csv"
+  "/Users/eunddodi/Desktop/conference/travelRecommendation/frontend/src/data/tour.csv"
 );
 
 const string_csv = file_csv.toString();
