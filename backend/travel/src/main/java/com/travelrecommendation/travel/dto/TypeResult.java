@@ -11,5 +11,5 @@ import java.util.HashMap;
 public class TypeResult {
 
     private Integer type;
-    private HashMap<String,Integer> scores;
+    private HashMap<String,Double> scores;
 }
