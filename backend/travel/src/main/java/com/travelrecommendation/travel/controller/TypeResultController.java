@@ -50,8 +50,6 @@ public class TypeResultController {
             }
         }
 
-//        log.info("test result bean activated3");
-
         TypeResult type= new TypeResult();
         type.setType(biggest);
         return type;
