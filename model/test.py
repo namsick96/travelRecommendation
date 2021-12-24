@@ -14,7 +14,7 @@ dbs = [
 @app.route("/", methods=["POST"])
 def index():
     content = request.json
-    content_dict = json.load(content)
+    content_dict = json.loads(content)
     result_dict = model.main(content_dict, dbs)
     result = {
         "type": content["type"],
