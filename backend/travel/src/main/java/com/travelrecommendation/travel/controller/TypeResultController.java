@@ -18,16 +18,16 @@ public class TypeResultController {
     public TypeResult test_Result(@RequestBody UserTypeResultRequest request) throws IllegalAccessException {
 
         //initialization
-        HashMap<String,Integer> scores=new HashMap<>();
-        scores.put("muk",0);
-        scores.put("activity",0);
-        scores.put("photo",0);
-        scores.put("healing",0);
-        scores.put("exhibition",0);
+        HashMap<String,Double> scores=new HashMap<>();
+        scores.put("activity",0.0);
+        scores.put("inside",0.0);
+        scores.put("nature",0.0);
+        scores.put("photo",0.0);
+        scores.put("cafe",0.0);
 
 //        log.info("test_result bean activated");
 
-        for( HashMap<String,Integer> i : request.getAnswer()){
+        for( HashMap<String,Double> i : request.getAnswer()){
             Set<String> keySet=i.keySet();
             for(String key : keySet){
                 scores.put(key,scores.get(key)+i.get(key));
@@ -37,11 +37,11 @@ public class TypeResultController {
 
 //        log.info("test result bean activated2");
 
-        int maximum=-100000;
+        double maximum=-100000;
         String biggest="";
         Set<String> keySet=scores.keySet();
         for(String key : keySet){
-            int now = scores.get(key);
+            double now = scores.get(key);
             if(now>=maximum){
                 biggest=key;
                 maximum=now;
@@ -49,19 +49,19 @@ public class TypeResultController {
         }
 
         Integer biggestType=-1;
-        if (biggest.equals("muk")){
+        if (biggest.equals("activity")){
             biggestType=1;
         }
-        else if (biggest.equals("healing")){
+        else if (biggest.equals("inside")){
             biggestType=2;
         }
-        else if (biggest.equals("photo")){
+        else if (biggest.equals("nature")){
             biggestType=3;
         }
-        else if (biggest.equals("activity")){
+        else if (biggest.equals("photo")){
             biggestType=4;
         }
-        else if (biggest.equals("exhibition")){
+        else if (biggest.equals("cafe")){
             biggestType=5;
         }
 

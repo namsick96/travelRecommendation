@@ -13,7 +13,7 @@ public class UserFinalRequest {
     private Integer type;
     private HashMap<String,Float> starting;
     private HashMap<String,Float> destination;
-    private HashMap<String,Integer> scores;
+    private HashMap<String,Double> scores;
     private Integer mvp;
     private String first;
     private String second;
