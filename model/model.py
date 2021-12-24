@@ -226,7 +226,7 @@ class DB:
 
             xl += 0.05
             yl += 0.1
-        print(result.index.tolist())
+
         return result.index.to_numpy()
 
     def getSquarebyTwo(self, src, dst):
@@ -333,7 +333,7 @@ def getBar(input, db):
     userScore = userScore[:-1]
 
     result = db.greedyVisitAlg2(dst, userScore)
-    db.getCoor()
+
     return result
 
 
