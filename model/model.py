@@ -205,7 +205,7 @@ class DB:
             result = self.dfCoor.query(condition)
 
             result_lst = result.index.tolist()
-            print(result_lst)
+
             xl += 0.05
             yl += 0.1
 

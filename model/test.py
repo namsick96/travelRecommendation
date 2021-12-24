@@ -28,6 +28,7 @@ def index():
         "alcohol3": result_dict[2][2],
     }
 
+    print(result)
     return json.dumps(result)
 
 
