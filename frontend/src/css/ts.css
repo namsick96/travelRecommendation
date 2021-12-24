@@ -1,0 +1,62 @@
+.bar1{
+    border: 0px;
+    margin: 0px;
+    padding-top: 2vh;
+    border-color: white;
+    background-color: white;
+    color: #F4A644;
+    font-size: 27px;
+    height: 6vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.testcont{
+    margin-top: 0px;
+    background-color: #F4A644;
+    width :100%;
+    height: 92vh;
+
+}
+
+.cont{
+    position: absolute;
+    left: 34vw;
+    top: 14vh;
+    width: 30vw;
+    height: 70vh;
+    border-radius: 10%;
+    background-color: white;
+}
+
+.test4{
+    position: absolute;
+    margin-top: 0px;
+    top : 12vh;
+    left : 6.5vw;
+    font-weight: bolder;
+}
+
+.question3{
+    position: absolute;
+    top : 16vh;
+    left: 9vw;
+}
+
+.island{
+    position: absolute;
+    top:26vh;
+    left: 10vw;
+    width: 150px;
+}
+
+.button6{
+    position: absolute;
+    top: 52vh;
+    left: 9.1vw;
+    height: 52px;
+    width: 12vw;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #007A0A;
+    color: white;
+    border: 2px solid #007A0A;
+}
