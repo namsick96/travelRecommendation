@@ -43,63 +43,39 @@ class Recommend:
         # all scores are save
         # categorize: food, bar, (cafe, tourism)
 
-    def recommend(self, userScore, PoI):
-
-        #가장 유사도가 높은 3개의 PoI를 딕셔너리로 출력
-        sorted(a.items() ,key=operator.itemgetter(1), reverse=True)[:3]
-
-        # cosim을 기반으로 userScore PoI들 쭈루룩 비교해서 dictionary 만드는 기능
-        pass
+    #def recommend(self, sim_dict):
+        
+        #a= cosim(self, userScore, dfscore)
+        #가장 유사도가 높은 것 부터 딕셔너리로 출력
+    
         # to-do 1
         # 기본 로직 1. 현재 위치가 들어오면 그 위치를 기준으로 거리제한 = PoI
         # 2. scroe 기반으로 정렬
-        # 3. return 하
-        # [액티비티,식당,...]
+        # 3. return
         # score = [0,1,,...]
         # PoI = [3,11,28,35,...](거리 기준으로 추려낸 장소들의 key값이 쭈루룩)
         # dfScore[3] = [0,1,1,...]
 
-        # return {3:0.24,11:0.56,...} or [0.24,0.56]
-
-    def cosim(self,userScore, dfscore):
+    def recommend(self,userScore):
         # list, numpy, series 2개의 vector가 주어지면 요거기반으로 cosim을 구하는 function
+        
         # category = ['액티비티', '식당', '카페', '술집', '자연', '전시', '감성']
-        # user_name 에는 사용자 이름만 담는다
 
-
-        dfscore = pd.concat([userScore, dfscore])
-
-        # category 안에는 PoI가 평가된 카테고리 이름만 담는다.
-        category = []
-        for i in userScore.iloc[user_name,:].index:
-            if math.isnan(userScore.iloc[user_name,i]) == False:
-                category.append(i)
-    
-        # U_df는 user_name가 평가된 것만 추출한다.
-        U_df = self.dfScore[0]
-    
-        # other_df는 PoI를 제외한 데이터프레임이다.
-        other_df=dfscore.iloc[:,category].drop(user_name, axis=0)
-    
-        # U_list는 PoI 가 평가된 카테고리를 리스트에 담는다.
-        U_list = list(U_df.index)
-    
-        #sum_dict에 PoI과 다른 PoI 간의 유사도를 평가한 결과를 담게 됩니다.
-        sim_dict={}
+        #fitness_dict에 PoI과 다른 PoI 간의 유사도를 평가한 결과를 담게 됩니다.
+        fitness_dict={}
     
         # user와 PoI 둘 다 평점을 매긴 카테고리에 대한 벡터로 코사인 유사도를 구한다.
-        for user in U_df.index:
-            sm= [m for m in U_df.columns if math.isnan(other_df.iloc[user,m])==False]
+        for user in userScore.index:
+            sm= [m for m in userScore.columns]
         
-            main_n = np.linalg.norm(U_df.iloc[user_name,sm])
-            user_n = np.linalg.norm(other_df.iloc[user,sm])
-            prod = np.dot(U_df.iloc[user_name,sm], other_df.iloc[user,sm])
-            sim_dict[user]=prod/(main_n*user_n)
+            main_n = np.linalg.norm(userScore.iloc[0,sm])
+            user_n = np.linalg.norm(self.dfScore.iloc[user,sm])
+            prod = np.dot(userScore.iloc[0,sm], self.dfScore.iloc[user,sm])
+            fitness_dict[user]=prod/(main_n*user_n)
 
-        #사용자
-        a=cosim(user_name, dfscore)
+        fitness = sorted(fitness_dict.items() ,key=operator.itemgetter(1), reverse=True)
 
-        return a
+        return fitness
 
 
 class DB:
