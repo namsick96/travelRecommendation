@@ -110,8 +110,6 @@ class DB:
 
         scores = scorewithoutP / penalties
 
-        print(scores)
-
         for _ in range(2):
             spot = np.argmax(scores)
             results.append(spot)
@@ -189,6 +187,7 @@ class DB:
 
             xl += 0.05
             yl += 0.1
+        print(result.index.tolist())
         return result.index.to_numpy()
 
     def getSquarebyTwo(self, src, dst):
@@ -301,7 +300,6 @@ def getBar(input, db):
 def main(inputs, dbs):
 
     iC, iR, iB = decomposeInput(inputs)
-    print(iC, iR, iB)
     courses = getCourse(iC, dbs[0])
     restaurants = getRestaruant(iR, dbs[1])
     bars = getBar(iB, dbs[2])
