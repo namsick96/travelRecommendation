@@ -180,7 +180,7 @@ class DB:
         yl = self.ylimit
         listOfPoI = []
 
-        while len(listOfPoI) == 0:
+        while len(listOfPoI) <= 3:
             listOfPoI = self.getSquarebyOne(temp_src, xl, yl)
             xl += 0.1
             yl += 0.1
