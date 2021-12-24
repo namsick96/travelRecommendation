@@ -263,7 +263,8 @@ class DB:
 def getCourse(input, db):
 
     dst, src, mvp, userScore = input
-    if dst == src:
+    print(getL2Distance(src, dst))
+    if getL2Distance(src, dst) <= 0.01:
         if mvp == 380:
             result = db.greedyVisitAlg(src, userScore)
         else:
@@ -282,7 +283,7 @@ def getRestaruant(input, db):
     dst, src, userScore = input
 
     userScore = userScore[:-1]
-    if dst == src:
+    if getL2Distance(src, dst) <= 0.01:
         result = db.greedyVisitAlg(src, userScore)
     else:
         result = db.squareVisitAlg(src, dst, userScore)
