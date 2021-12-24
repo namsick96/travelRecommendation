@@ -162,6 +162,8 @@ class DB:
                 yl += 0.1
             scores = self.rS.recommend(listOfPoI, userScore)
             spot = np.argmax(scores)
+            scores[spot] = -1
+            spot = np.argmax(scores)
             temp_src = self.getCoor(spot)
             results.append(spot)
 
