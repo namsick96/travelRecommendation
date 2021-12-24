@@ -4,8 +4,8 @@ import axios from "axios";
 let initialState = {
   type: 0,
   scores: {},
-  src: { lat: 0, lng: 0 },
-  dst: { lat: 0, lng: 0 },
+  starting: { lat: 0, lng: 0 },
+  destination: { lat: 0, lng: 0 },
   mvp: 0,
   result: {},
 };
@@ -44,17 +44,20 @@ function place(state = initialState, action) {
       };
     case "ADD_SRC":
       console.log("src dispatch happend!");
-      console.log({ ...state, src: { lat: action.lat, lng: action.lng } });
+      console.log({ ...state, starting: { lat: action.lat, lng: action.lng } });
       return {
         ...state,
-        src: { lat: action.lat, lng: action.lng },
+        starting: { lat: action.lat, lng: action.lng },
       };
     case "ADD_DST":
       console.log("dst dispatch happend!");
-      console.log({ ...state, dst: { lat: action.lat, lng: action.lng } });
+      console.log({
+        ...state,
+        destination: { lat: action.lat, lng: action.lng },
+      });
       return {
         ...state,
-        dst: { lat: action.lat, lng: action.lng },
+        destination: { lat: action.lat, lng: action.lng },
       };
     case "ADD_MVP":
       console.log("mvp dispatch happend!");

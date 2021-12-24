@@ -35,6 +35,7 @@ function Loading() {
 }
 
 function ResultComponent(props) {
+  console.log(props);
   return (
     <div>
       <p>test</p>
