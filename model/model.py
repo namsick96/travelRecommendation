@@ -112,14 +112,13 @@ class DB:
 
         for _ in range(2):
             spot = np.argmax(scores)
-            results.append(spot)
+            results.append(listOfPoI[spot])
             scores[spot] = -1
 
         if not mvp:
             spot = np.argmax(scores)
-            results.append(spot)
+            results.append(listOfPoI[spot])
         else:
-
             results.append(mvp)
 
         return self.getResult(results, src, dst)
@@ -199,12 +198,12 @@ class DB:
         scores = scores / penalties
 
         result = []
-        print(scores)
+
         for _ in range(3):
             spot = np.argmax(scores)
             scores[spot] = -1
             result.append(listOfPoI[spot])
-        print(result)
+
         return self.getResult(results, src, src)
 
     def getSquarebyOne(self, place, xl, yl):
@@ -282,7 +281,7 @@ class DB:
 
         coors = [self.getCoor(i) for i in lst]
         names = [self.dfCoor.iloc[i, 1] for i in lst]
-        adds = [list(self.dfCoor.iloc[i]) for i in lst]
+        print(names)
         distfromSrc = np.array([getL2Distance(i, src) for i in coors])
         results.append(names[np.argmin(distfromSrc)])
 
