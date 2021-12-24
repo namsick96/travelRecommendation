@@ -49,7 +49,6 @@ public class TypeResultController {
                 maximum=now;
             }
         }
-
         TypeResult type= new TypeResult();
         type.setType(biggest);
         return type;
