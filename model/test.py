@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import model
+import json
 
 
 app = Flask(__name__)
@@ -23,12 +24,13 @@ def index():
         "third": result_dict[0][2],
         "restaurant1": result_dict[1][0],
         "restaurant2": result_dict[1][1],
-        "restaurnat3": result_dict[1][2],
-        "alchol1": result_dict[2][0],
-        "alchol2": result_dict[2][1],
-        "alchol3": result_dict[2][2],
+        "restaurant3": result_dict[1][2],
+        "alcohol1": result_dict[2][0],
+        "alcohol2": result_dict[2][1],
+        "alcohol3": result_dict[2][2],
     }
-    return jsonify(result)
+
+    return json.dumps(result)
 
 
 app.run(host="0.0.0.0", port=8081)
