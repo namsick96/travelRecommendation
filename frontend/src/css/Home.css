@@ -24,25 +24,28 @@
 }
 
 .jejutitle{
+    font-family: 'WandohopeR';
     position: absolute;
     top: 24vh;
-    left: 13vh;
-    font-size: 80px;
+    left: 11.3vh;
+    text-align: center;
+    font-size: 100px;
     margin: 0px;
     color: #007A0A;
 }
 
 .service{
+    font-family: 'EliceDigitalBaeum_Bold';
     position: absolute;
     color: #F4A644;
-    top: 38vh;
-    left: 17vh;
+    top: 39vh;
+    left: 17.4vh;
 }
 
 .tr{
     position: absolute;
     top: 48vh;
-    left: 18vh;
+    left: 17vh;
     height: 52px;
     border-radius: 8px;
     font-weight: bold;

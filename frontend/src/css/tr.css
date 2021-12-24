@@ -1,4 +1,4 @@
-.bar1{    
+.bar1{
     font-family: 'WandohopeR';
     border: 0px;
     margin: 0px;
@@ -9,7 +9,6 @@
     font-size: 27px;
     height: 6vh;
 }
-
 .testcont{
     margin-top: 0px;
     background-color: #F4A644;
@@ -18,41 +17,36 @@
 
 }
 
-.cont{
-    position: absolute;
-    left: 34vw;
-    top: 14vh;
-    width: 30vw;
-    height: 70vh;
-    border-radius: 10%;
-    background-color: white;
-}
-
-.test4{
+.hashtag{
+    color: #007A0A;
     position: absolute;
     margin-top: 0px;
-    top : 12vh;
-    left : 6.5vw;
+    top : 7vh;
+    left : 13.5vw;
     font-weight: bolder;
+    font-size: 50px;
 }
 
-.question3{
+.loading{
+    font-weight: bolder;
+    font-size: 34px;
     position: absolute;
-    top : 16vh;
-    left: 9vw;
+    margin-top: 0px;
+    top : 14vh;
+    left : 6vw;
 }
 
-.island{
+.jihoon{
     position: absolute;
-    top:26vh;
-    left: 10vw;
-    width: 150px;
+    top:22.5vh;
+    left: 8.6vw;
+    width: 200px;
 }
 
-.button6{
+.button7{
     position: absolute;
-    top: 52vh;
-    left: 9.1vw;
+    top: 55vh;
+    left: 9.2vw;
     height: 52px;
     width: 12vw;
     border-radius: 8px;
@@ -62,7 +56,7 @@
     border: 2px solid #007A0A;
 }
 
-.button6:active {
+.button7:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }

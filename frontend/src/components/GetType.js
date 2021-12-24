@@ -5,6 +5,7 @@ import { useParams, useHistory, Link, Route } from "react-router-dom";
 import Questions from "../data/questions";
 import { useSelector, useDispatch } from "react-redux";
 import "../css/Type.css";
+import font from "../font/font.css";
 
 function GetType() {
   let { id } = useParams();
@@ -16,7 +17,7 @@ function GetType() {
   return (
     <>
       <div className="content">
-        <h4 className="bar">여기 올레</h4>
+        <h4 className="bar" style={{fontFamily : 'WandohopeR'}}>여기 올레</h4>
         <div className="container">
         <h2 className="num">Q{id}.</h2>
         <h3 className="question">{found.question}</h3>

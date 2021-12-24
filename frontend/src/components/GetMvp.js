@@ -4,6 +4,7 @@ import Select from "react-select";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import '../css/Mvp.css';
+import font from "../font/font.css";
 
 const list = [
   // label, value 형식은 지켜야 함
@@ -26,7 +27,7 @@ function GetMvp() {
 
   return (
     <>
-      <h4 className="bar">여기 올레</h4>
+      <h4 className="bar" style={{fontFamily : 'WandohopeR'}}>여기 올레</h4>
       <h3 className="rec">꼭 방문하고 싶은 PLACE를 골라주세요</h3>
       <div className="selection1">
         <Select 
