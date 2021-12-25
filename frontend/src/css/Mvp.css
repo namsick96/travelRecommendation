@@ -1,0 +1,46 @@
+.bar {
+    font-family: 'WandohopeR';
+    border: 0px;
+    margin: 0px;
+    padding-top: 2vh;
+    border-color: #F4A644;
+    background-color: #F4A644;
+    color: white;
+    font-size: 27px;
+    height: 6vh;
+  }
+
+.rec{
+    margin-top: 120px;
+    position: relative;
+    font-size: 35px;
+}
+
+.selection1{
+    position: relative;
+    margin-top: 60px;
+    margin-left: 500px;
+    width: 500px;
+}
+
+.button1{
+    position: absolute;
+    margin-top: 228px;
+    right: -120px;
+    height: 52px;
+    width: 140px;
+    border-radius: 8px;
+    font-size: 21px;
+    font-weight: bold;
+    background-color: #007A0A;
+    color: white;
+    border: 2px solid #007A0A;
+
+}
+
+
+
+.button1:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

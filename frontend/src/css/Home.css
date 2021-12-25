@@ -1,0 +1,50 @@
+.homecont {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4a644;
+  margin: auto;
+}
+
+.titlecont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute; 
+  width: 70vh;
+  height: 70vh;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.jejutitle{
+    font-family: 'WandohopeR';
+    text-align: center;
+    font-size: 100px;
+    margin: 0px;
+    color: #007A0A;
+}
+
+.service{
+    font-family: 'EliceDigitalBaeum_Bold';
+    color: #F4A644;
+}
+
+.tr{
+    height: 52px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #007A0A;
+    color: white;
+    border: 2px solid #007A0A;
+}
+
+.jeju{
+  position: absolute;
+  height : 14vh;
+  top :86vh;
+  left: 47vw;
+}
