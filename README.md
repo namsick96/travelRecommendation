@@ -28,6 +28,7 @@
   - **Model**
     - python3.8
     - Selenium
+    - scikit-learn
   - **AWS**
     - AWS EC2
   - **External API**
